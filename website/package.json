@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build": "sagui build",
+    "dist": "sagui dist",
+    "format": "sagui format",
+    "start": "sagui develop --port 3001"
+  },
+  "devDependencies": {
+    "sagui": "^11.4.2"
+  },
+  "dependencies": {
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0"
+  }
+}

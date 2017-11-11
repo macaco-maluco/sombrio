@@ -1,0 +1,125 @@
+* {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#root {
+  box-sizing: border-box;
+  color: rgb(50, 54, 72);
+  display: block;
+  font-size: 16px;
+  height: 792.5px;
+  padding-bottom: 80px;
+  padding-top: 160px;
+  position: relative;
+  text-size-adjust: 100%;
+  width: 1425px;
+  -webkit-font-smoothing: antialiased;
+}
+.header {
+  width: 616px;
+  box-sizing: border-box;
+  color: rgb(245, 245, 245);
+  display: block;
+  font-size: 54px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: normal;
+  line-height: 48.4px;
+  margin-left: 404.5px;
+  margin-right: 404.5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  max-width: 616px;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.header-secondary {
+  font-size: 24px;
+  color: rgb(245, 245, 245);
+  text-align: center;
+  margin: 0;
+}
+
+.background {
+  background-color: rgb(51, 0, 102);
+  background-image: url(https://www.transparenttextures.com/patterns/maze-white.png);
+  bottom: 0px;
+  box-sizing: border-box;
+  color: rgb(50, 54, 72);
+  display: block;
+  font-size: 16px;
+  height: 792.5px;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  text-size-adjust: 100%;
+  top: 0px;
+  width: 1425px;
+  z-index: -1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.downloads {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.download {
+  display: inline-block;
+  margin: 10px;
+  align-items: flex-start;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgb(255, 255, 255);
+  background-image: none;
+  background-origin: padding-box;
+  background-position-x: 0px;
+  background-position-y: 0px;
+  background-size: auto;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: rgb(28, 41, 157);
+  cursor: pointer;
+  flex-basis: auto;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 700;
+  height: 57px;
+  letter-spacing: normal;
+  line-height: 18.2px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 19px;
+  text-align: center;
+  text-decoration-color: rgb(28, 41, 157);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  text-indent: 0px;
+  text-rendering: auto;
+  text-shadow: none;
+  text-size-adjust: 100%;
+  text-transform: uppercase;
+  transition-delay: 0s, 0s, 0s;
+  transition-duration: 0.42s, 0.42s, 0.42s;
+  transition-property: box-shadow, color, background;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1), cubic-bezier(0.165, 0.84, 0.44, 1),
+    cubic-bezier(0.165, 0.84, 0.44, 1);
+  white-space: nowrap;
+  width: 164.641px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-border-image: none;
+}
