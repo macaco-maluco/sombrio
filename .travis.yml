@@ -7,7 +7,6 @@ before_install:
   - brew update
 branches:
   only:
-    - master
     - /^v\d+(\.\d+)+$/
 jobs:
   include:
