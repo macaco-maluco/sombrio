@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+curl -o- -L https://yarnpkg.com/install.sh | bash
+export PATH=$HOME/.yarn/bin:$PATH
+
 GITHUB_DOWNLOAD="https://github.com/Hackbit/nko2017-sombrio/releases/download"
 
 export MAC_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_TAG}/Sombrio-darwin-x64.zip"
