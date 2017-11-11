@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash --login
+
+set -e
 
 rvm use ruby-2.3.1
 brew install yarn
