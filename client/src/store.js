@@ -13,6 +13,7 @@ export const initialState = {
   playerPosition: [3, 6],
   targetPosition: [0, 0],
   monsterPosition: [8, 6],
+  stagedModifications: [],
   objects: [
     // this is a line
     { type: 'wall', position: [8, 1] },
@@ -50,6 +51,16 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'STAGE_MODIFICATION_IN_PIXELS': {
+      return {
+        ...state,
+        stagedModifications: [
+          ...state.stagedModifications,
+          { type: 'wall', position: fromPixels(action.payload) },
+        ],
+      }
+    }
+
     case 'MOVE_TO_PIXELS': {
       return {
         ...state,
@@ -57,25 +68,18 @@ export const reducer = (state = initialState, action) => {
       }
     }
 
-    case 'MODIFY': {
+    case 'COMMIT_MODIFICATION': {
       const position = action.payload
+
+      const stagedModifications = state.stagedModifications.filter(
+        object => !equals(object.position, position)
+      )
+
       const objects = state.objects.filter(object => !equals(object.position, position))
 
       return {
         ...state,
-        objects:
-          objects.length !== state.objects.length
-            ? objects
-            : [...state.objects, { type: 'wall', position }],
-      }
-    }
-
-    case 'MODIFY_IN_PIXELS': {
-      const position = fromPixels(action.payload)
-      const objects = state.objects.filter(object => !equals(object.position, position))
-
-      return {
-        ...state,
+        stagedModifications,
         objects:
           objects.length !== state.objects.length
             ? objects
@@ -102,7 +106,7 @@ const createGrid = (width, height) => range(0, height).map(line => range(0, widt
 export const grid2d = state => {
   const emptyGrid = createGrid(state.width, state.height)
 
-  return state.objects.reduce((grid, object) => {
+  return allObjects(state).reduce((grid, object) => {
     grid[object.position[1]][object.position[0]] = 1
     return grid
   }, emptyGrid)
@@ -111,8 +115,19 @@ export const grid2d = state => {
 export const toPixels = x => x.map(y => y * 60)
 export const fromPixels = x => x.map(y => Math.floor(y / 60))
 
+export const allObjects = state =>
+  state.stagedModifications.reduce((objects, stagedModification) => {
+    const filteredObjects = objects.filter(
+      object => !equals(object.position, stagedModification.position)
+    )
+
+    return filteredObjects.length !== objects.length
+      ? filteredObjects
+      : [...objects, stagedModification]
+  }, state.objects)
+
 export const objectsInPixes = state =>
-  state.objects.map(object => ({ ...object, position: toPixels(object.position) }))
+  allObjects(state).map(object => ({ ...object, position: toPixels(object.position) }))
 
 export const playerInPixels = state => toPixels(state.playerPosition)
 
@@ -136,9 +151,12 @@ export const findPlayerPath = state => {
 
 export const moveToPixels = position => ({ type: 'MOVE_TO_PIXELS', payload: position })
 
-export const modifyInPixels = position => ({ type: 'MODIFY_IN_PIXELS', payload: position })
+export const stageModificationInPixels = position => ({
+  type: 'STAGE_MODIFICATION_IN_PIXELS',
+  payload: position,
+})
 
-export const modify = position => ({ type: 'MODIFY', payload: position })
+export const commitModification = position => ({ type: 'COMMIT_MODIFICATION', payload: position })
 
 export const tick = () => ({
   type: 'TICK',

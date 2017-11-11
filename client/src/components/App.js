@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
   moveToPixels,
-  modifyInPixels,
+  stageModificationInPixels,
   objectsInPixes,
   playerInPixels,
   monsterInPixels,
@@ -81,7 +81,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onMove: positionInPixels => dispatch(moveToPixels(positionInPixels)),
-  onModify: positionInPixels => dispatch(modifyInPixels(positionInPixels)),
+  onModify: positionInPixels => dispatch(stageModificationInPixels(positionInPixels)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,9 +1,9 @@
 import { ipcRenderer } from 'electron'
 import { path } from 'ramda'
-import { modify } from '../store'
+import { commitModification } from '../store'
 
 const getPosition = path(['value', 'content', 'position'])
 
 export default ({ dispatch }) => {
-  ipcRenderer.on('wall', (event, message) => dispatch(modify(getPosition(message))))
+  ipcRenderer.on('wall', (event, message) => dispatch(commitModification(getPosition(message))))
 }
