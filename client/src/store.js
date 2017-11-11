@@ -1,7 +1,6 @@
 import { range, equals } from 'ramda'
 import PF from 'pathfinding'
 import { createStore } from 'redux'
-import tickEffect from './effects/tick'
 
 export const initialState = {
   window: {
@@ -51,13 +50,27 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'MOVE_TO_PIXELS':
+    case 'MOVE_TO_PIXELS': {
       return {
         ...state,
         targetPosition: fromPixels(action.payload),
       }
+    }
 
-    case 'MODIFY_IN_PIXELS':
+    case 'MODIFY': {
+      const position = action.payload
+      const objects = state.objects.filter(object => !equals(object.position, position))
+
+      return {
+        ...state,
+        objects:
+          objects.length !== state.objects.length
+            ? objects
+            : [...state.objects, { type: 'wall', position }],
+      }
+    }
+
+    case 'MODIFY_IN_PIXELS': {
       const position = fromPixels(action.payload)
       const objects = state.objects.filter(object => !equals(object.position, position))
 
@@ -68,16 +81,19 @@ export const reducer = (state = initialState, action) => {
             ? objects
             : [...state.objects, { type: 'wall', position }],
       }
+    }
 
-    case 'TICK':
+    case 'TICK': {
       return {
         ...state,
         monsterPosition: findMonsterPath(state)[1] || state.monsterPosition,
         playerPosition: findPlayerPath(state)[1] || state.playerPosition,
       }
+    }
 
-    default:
+    default: {
       return state
+    }
   }
 }
 
@@ -122,8 +138,13 @@ export const moveToPixels = position => ({ type: 'MOVE_TO_PIXELS', payload: posi
 
 export const modifyInPixels = position => ({ type: 'MODIFY_IN_PIXELS', payload: position })
 
-const store = createStore(reducer)
+export const modify = position => ({ type: 'MODIFY', payload: position })
 
-tickEffect(store)
+export const tick = () => ({
+  type: 'TICK',
+  payload: Date.now(),
+})
+
+const store = createStore(reducer)
 
 export default store

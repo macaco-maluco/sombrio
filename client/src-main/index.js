@@ -1,6 +1,7 @@
 const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
+const connect = require('./connect')
 
 const env = process.env.NODE_ENV
 
@@ -28,6 +29,19 @@ function createWindow() {
   if (env === 'development') {
     win.webContents.openDevTools()
   }
+
+  connect().then(client => {
+    client.feed$.subscribe({
+      next: content => {
+        console.log('content', content)
+        win.webContents.send('wall', content)
+      },
+      error: error => {
+        console.log('error', error)
+      },
+      complete: () => console.log('done'),
+    })
+  })
 
   // Emitted when the window is closed.
   win.on('closed', () => {
