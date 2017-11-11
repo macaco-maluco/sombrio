@@ -66,6 +66,16 @@ export const grid2d = state => {
 export const objectsInPixes = state =>
   state.objects.map(object => ({ x: object.x * 60, y: object.y * 60 }))
 
+export const playerInPixels = state => ({
+  x: state.playerPosition.x * state.gridSize,
+  y: state.playerPosition.y * state.gridSize,
+})
+
+export const monsterInPixels = state => ({
+  x: state.monsterPosition.x * state.gridSize,
+  y: state.monsterPosition.y * state.gridSize,
+})
+
 export const findPath = state => {
   const grid = new PF.Grid(grid2d(state))
   const finder = new PF.AStarFinder()
