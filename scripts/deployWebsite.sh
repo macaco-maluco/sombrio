@@ -1,13 +1,15 @@
 #!/bin/bash -e
 
+TRAVIS_BRANCH=$1
+
 curl -o- -L https://yarnpkg.com/install.sh | bash
 export PATH=$HOME/.yarn/bin:$PATH
 
 GITHUB_DOWNLOAD="https://github.com/Hackbit/nko2017-sombrio/releases/download"
 
-export MAC_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_TAG}/Sombrio-darwin-x64.zip"
-export WINDOWS_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_TAG}/Sombrio-linux-x64.zip"
-export LINUX_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_TAG}/Sombrio-win32-x64.zip"
+export MAC_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-darwin-x64.zip"
+export WINDOWS_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-linux-x64.zip"
+export LINUX_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-win32-x64.zip"
 
 pushd website && yarn install && yarn dist && popd
 
