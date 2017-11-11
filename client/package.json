@@ -30,6 +30,9 @@
     "sagui": "^11.4.2"
   },
   "dependencies": {
-    "electron": "^1.7.9"
+    "@most/create": "^2.0.1",
+    "electron": "^1.7.9",
+    "most": "^1.7.2",
+    "ssb-client": "^4.5.1"
   }
 }
