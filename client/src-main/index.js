@@ -2,8 +2,7 @@ const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
 const connect = require('./connect')
-
-const env = process.env.NODE_ENV
+const env = require('./env')
 
 const appPath =
   env === 'production'

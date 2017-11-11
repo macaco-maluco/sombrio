@@ -11,8 +11,8 @@ cp -r client/src-main build/src-main
 cp client/package.json build/
 
 echo -e "\n[🔨] set environment to production"
-sed -i.bak -- 's/process\.env\.NODE_ENV/"production"/g' ./build/src-main/index.js
-rm ./build/src-main/index.js.bak
+sed -i.bak -- 's/process\.env\.NODE_ENV/"production"/g' ./build/src-main/env.js
+rm ./build/src-main/env.js.bak
 
 echo -e "\n[🔨] installing dependencies"
 pushd build/ && yarn install --prod && popd
