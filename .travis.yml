@@ -1,0 +1,10 @@
+os: osx
+language: node_js
+node_js:
+  - "8"
+jobs:
+  include:
+    - stage: Compile app
+      script: brew install yarn
+      script: ./scripts/install.sh
+      script: ./scripts/distribute.sh
