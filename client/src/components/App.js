@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { objectsInPixes, playerInPixels, monsterInPixels } from '../store'
+import { objectsInPixes, playerInPixels, monsterInPixels, targetInPixel } from '../store'
 
 const styles = {
   svg: {
@@ -16,6 +16,17 @@ const Wall = ({ position }) => (
   </g>
 )
 
+const Target = ({ position }) => (
+  <g style={{ transform: `translate(${position[0]}px, ${position[1]}px)` }}>
+    <path
+      stroke="blue"
+      strokeWidth="4"
+      fill="none"
+      d={`M0,0 ${gridUnit},0 ${gridUnit},${gridUnit} 0,${gridUnit}`}
+    />
+  </g>
+)
+
 const Player = ({ position }) => (
   <g style={{ transform: `translate(${position[0]}px, ${position[1]}px)` }}>
     <path fill="blue" d={`M0,0 ${gridUnit},0 ${gridUnit},${gridUnit} 0,${gridUnit}`} />
@@ -28,8 +39,9 @@ const Monster = ({ position }) => (
   </g>
 )
 
-const App = ({ width, height, objects, playerPosition, monsterPosition }) => (
+const App = ({ width, height, objects, playerPosition, monsterPosition, targetPosition }) => (
   <svg width={width} height={height} style={styles.svg}>
+    <Target position={targetPosition} />
     <Player position={playerPosition} />
     <Monster position={monsterPosition} />
     {objects.map(({ position }) => <Wall position={position} />)}
@@ -42,6 +54,7 @@ const mapStateToProps = state => ({
   objects: objectsInPixes(state),
   playerPosition: playerInPixels(state),
   monsterPosition: monsterInPixels(state),
+  targetPosition: targetInPixel(state),
 })
 
 const mapDispatchToProps = () => ({})

@@ -83,6 +83,8 @@ export const playerInPixels = state => toPixels(state.playerPosition)
 
 export const monsterInPixels = state => toPixels(state.monsterPosition)
 
+export const targetInPixel = state => toPixels(state.targetPosition)
+
 export const findMonsterPath = state => {
   const grid = new PF.Grid(grid2d(state))
   const finder = new PF.AStarFinder()
