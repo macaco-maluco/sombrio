@@ -5,8 +5,8 @@ import { initialState, objectsInPixes } from './store'
 
 render(
   <App
-    width={initialState.width}
-    height={initialState.height}
+    width={initialState.window.width}
+    height={initialState.window.height}
     objects={objectsInPixes(initialState)}
   />,
   document.getElementById('root')
