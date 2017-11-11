@@ -12,6 +12,7 @@ export const initialState = {
   width: 11,
   height: 11,
   playerPosition: [3, 6],
+  targetPosition: [0, 0],
   monsterPosition: [8, 6],
   objects: [
     // this is a line
@@ -53,7 +54,8 @@ export const reducer = (state = initialState, action) => {
     case 'TICK':
       return {
         ...state,
-        monsterPosition: findPath(state)[1],
+        monsterPosition: findMonsterPath(state)[1] || state.monsterPosition,
+        playerPosition: findPlayerPath(state)[1] || state.playerPosition,
       }
 
     default:
@@ -81,11 +83,18 @@ export const playerInPixels = state => toPixels(state.playerPosition)
 
 export const monsterInPixels = state => toPixels(state.monsterPosition)
 
-export const findPath = state => {
+export const findMonsterPath = state => {
   const grid = new PF.Grid(grid2d(state))
   const finder = new PF.AStarFinder()
 
   return finder.findPath(...state.monsterPosition, ...state.playerPosition, grid)
+}
+
+export const findPlayerPath = state => {
+  const grid = new PF.Grid(grid2d(state))
+  const finder = new PF.AStarFinder()
+
+  return finder.findPath(...state.playerPosition, ...state.targetPosition, grid)
 }
 
 const store = createStore(reducer)
