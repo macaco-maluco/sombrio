@@ -1,5 +1,15 @@
+const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
+
+const appPath =
+  process.env.NODE_ENV === 'production'
+    ? `file://${path.resolve(__dirname, '../dist/app.asar')}/index.html`
+    : url.format({
+        pathname: 'localhost:3000/index.html',
+        protocol: 'http:',
+        slashes: true,
+      })
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -10,16 +20,12 @@ function createWindow() {
   win = new BrowserWindow({ width: 800, height: 600 })
 
   // and load the index.html of the app.
-  win.loadURL(
-    url.format({
-      pathname: 'localhost:3000/index.html',
-      protocol: 'http:',
-      slashes: true,
-    })
-  )
+  win.loadURL(appPath)
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  if (process.env.NODE_ENV === 'development') {
+    win.webContents.openDevTools()
+  }
 
   // Emitted when the window is closed.
   win.on('closed', () => {
