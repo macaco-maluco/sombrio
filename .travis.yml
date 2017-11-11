@@ -7,7 +7,8 @@ before_install:
   - brew update
 branches:
   only:
-    - /^v\d+(\.\d+)+$/
+    - master
+#    - /^v\d+(\.\d+)+$/
 jobs:
   include:
     # - stage: Compile and Release app
@@ -24,6 +25,7 @@ jobs:
     #       tags: true
     - stage: Build Sombrio Website
       script:
+        - env
         - ./scripts/deployWebsite.sh
         - git config --global user.email "travis@travis-ci.org"
         - git config --global user.name "Travis CI"
