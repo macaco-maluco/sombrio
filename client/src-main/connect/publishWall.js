@@ -3,7 +3,7 @@ module.exports = sbot => position =>
     sbot.publish(
       {
         type: 'macaco_maluco-sombrio-wall',
-        position: [0, 0],
+        position: position,
         channel: 'sombrio_shared_world',
       },
       error => {

@@ -91,6 +91,9 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'TICK': {
+      // make the state available in the window for debugging
+      window.state = state
+
       return {
         ...state,
         monsterPosition: findMonsterPath(state)[1] || state.monsterPosition,
@@ -116,6 +119,8 @@ export const grid2d = state => {
     return grid
   }, emptyGrid)
 }
+
+export const getFirstStagedModification = state => state.stagedModifications[0]
 
 export const toPixels = x => x.map(y => y * 60)
 export const fromPixels = x => x.map(y => Math.floor(y / 60))

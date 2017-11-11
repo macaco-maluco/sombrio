@@ -1,5 +1,5 @@
 const path = require('path')
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const url = require('url')
 const connect = require('./connect')
 const env = require('./env')
@@ -39,6 +39,10 @@ function createWindow() {
         console.log('error', error)
       },
       complete: () => console.log('done'),
+    })
+
+    ipcMain.on('wall', (event, position) => {
+      client.publishWall(position)
     })
   })
 
