@@ -3,7 +3,12 @@
     "build": "sagui build",
     "dist": "sagui dist",
     "format": "sagui format",
-    "start": "sagui develop --port 3001"
+    "start": "sagui develop --port 3001",
+    "test": "sagui test",
+    "test:lint": "sagui test:lint",
+    "test:typecheck": "sagui test:typecheck",
+    "test:unit": "sagui test:unit --coverage",
+    "test:unit:watch": "sagui test:unit --watch"
   },
   "devDependencies": {
     "sagui": "^11.4.2"
