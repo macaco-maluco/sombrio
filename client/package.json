@@ -20,7 +20,11 @@
   },
   "dependencies": {
     "electron": "^1.7.9",
+    "ramda": "^0.25.0",
     "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "react-dom": "^16.1.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-heat": "^0.4.0"
   }
 }
