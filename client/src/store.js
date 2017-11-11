@@ -1,5 +1,7 @@
 import { range } from 'ramda'
 import PF from 'pathfinding'
+import { createStore } from 'redux'
+import tickEffect from './effects/tick'
 
 export const initialState = {
   window: {
@@ -65,7 +67,7 @@ export const grid2d = state => {
   const emptyGrid = createGrid(state.width, state.height)
 
   return state.objects.reduce((grid, object) => {
-    grid[object.position[0]][object.position[1]] = 1
+    grid[object.position[1]][object.position[0]] = 1
     return grid
   }, emptyGrid)
 }
@@ -85,3 +87,9 @@ export const findPath = state => {
 
   return finder.findPath(...state.monsterPosition, ...state.playerPosition, grid)
 }
+
+const store = createStore(reducer)
+
+tickEffect(store)
+
+export default store

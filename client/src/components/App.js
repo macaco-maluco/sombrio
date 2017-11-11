@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { objectsInPixes, playerInPixels, monsterInPixels } from '../store'
 
 const styles = {
   svg: {
@@ -26,10 +28,22 @@ const Monster = ({ position }) => (
   </g>
 )
 
-export default ({ width, height, objects, playerPosition, monsterPosition }) => (
+const App = ({ width, height, objects, playerPosition, monsterPosition }) => (
   <svg width={width} height={height} style={styles.svg}>
     <Player position={playerPosition} />
     <Monster position={monsterPosition} />
     {objects.map(({ position }) => <Wall position={position} />)}
   </svg>
 )
+
+const mapStateToProps = state => ({
+  width: state.window.width,
+  height: state.window.height,
+  objects: objectsInPixes(state),
+  playerPosition: playerInPixels(state),
+  monsterPosition: monsterInPixels(state),
+})
+
+const mapDispatchToProps = () => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

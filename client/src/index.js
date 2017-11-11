@@ -1,15 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import App from './components/App'
-import { initialState, objectsInPixes, playerInPixels, monsterInPixels } from './store'
+import store, { initialState, objectsInPixes, playerInPixels, monsterInPixels } from './store'
 
 render(
-  <App
-    width={initialState.window.width}
-    height={initialState.window.height}
-    objects={objectsInPixes(initialState)}
-    playerPosition={playerInPixels(initialState)}
-    monsterPosition={monsterInPixels(initialState)}
-  />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )
