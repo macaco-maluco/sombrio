@@ -5,6 +5,10 @@ node_js:
   - "8"
 before_install:
   - brew update
+branches:
+  only:
+    - master
+    - /^v\d+(\.\d+)+$/
 jobs:
   include:
     - stage: Compile app
