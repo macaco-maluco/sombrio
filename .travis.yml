@@ -12,3 +12,12 @@ jobs:
   include:
     - stage: Compile app
       script: ./scripts/deploy.sh
+    - stage: Release app tag
+      script: echo "Deploying to GitHub releases..."
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        file: "FILE TO UPLOAD"
+        skip_cleanup: true
+        on:
+          tags: true
