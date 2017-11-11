@@ -97,7 +97,7 @@ const App = ({
           width={width}
           height={height}
           style={styles.svg}
-          onContextMenu={e => onModify([e.clientX, e.clientY])}
+          onContextMenu={e => onModify([e.clientX + x, e.clientY + y])}
           onClick={e => onMove([e.clientX + x, e.clientY + y])}
         >
           <Target position={targetPosition} />
