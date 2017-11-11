@@ -7,7 +7,7 @@ export const initialState = {
   scale: 1,
   gridSize: 60,
   playerPosition: [3, 6],
-  targetPosition: [0, 0],
+  targetPosition: [4, 4],
   monsterPosition: [8, 6],
   stagedModifications: [],
   objects: [
