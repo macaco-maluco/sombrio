@@ -11,7 +11,7 @@ pushd website && yarn install && yarn dist && popd
 rm -rf build-website
 mkdir build-website
 
-cp -r website/dist build-website/dist
+cp -r website/dist/* build-website/
 cp website/index.php build-website/index.php
 cp website/Composer.json build-website/Composer.json
 
