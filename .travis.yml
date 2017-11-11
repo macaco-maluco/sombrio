@@ -6,5 +6,5 @@ jobs:
   include:
     - stage: Compile app
       script: brew install yarn
-      script: ./scripts/install.sh
-      script: ./scripts/distribute.sh
+    - script: ./scripts/install.sh
+    - script: ./scripts/distribute.sh
