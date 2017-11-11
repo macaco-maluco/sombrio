@@ -1,4 +1,5 @@
 import React from 'react'
+import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
 import {
   moveToPixels,
@@ -74,19 +75,39 @@ const App = ({
   targetPosition,
   onMove,
   onModify,
+  scale,
 }) => (
-  <svg
-    width={width}
-    height={height}
-    style={styles.svg}
-    onContextMenu={e => onModify([e.clientX, e.clientY])}
-    onClick={e => onMove([e.clientX, e.clientY])}
+  <Motion
+    defaultStyle={{
+      x: targetPosition[0],
+      y: targetPosition[1],
+    }}
+    style={{
+      x: spring(targetPosition[0], { stiffness: 20, damping: 15 }),
+      y: spring(targetPosition[1], { stiffness: 20, damping: 15 }),
+    }}
   >
-    <Target position={targetPosition} />
-    <Player position={playerPosition} />
-    <Monster position={monsterPosition} />
-    {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
-  </svg>
+    {style => {
+      const x = style.x - width * scale / 2
+      const y = style.y - height * scale / 2
+
+      return (
+        <svg
+          viewBox={`${x} ${y} ${width * scale} ${height * scale}`}
+          width={width}
+          height={height}
+          style={styles.svg}
+          onContextMenu={e => onModify([e.clientX, e.clientY])}
+          onClick={e => onMove([e.clientX + x, e.clientY + y])}
+        >
+          <Target position={targetPosition} />
+          <Player position={playerPosition} />
+          <Monster position={monsterPosition} />
+          {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
+        </svg>
+      )
+    }}
+  </Motion>
 )
 
 const mapStateToProps = state => ({
@@ -96,6 +117,7 @@ const mapStateToProps = state => ({
   playerPosition: playerInPixels(state),
   monsterPosition: monsterInPixels(state),
   targetPosition: targetInPixel(state),
+  scale: state.scale,
 })
 
 const mapDispatchToProps = dispatch => ({

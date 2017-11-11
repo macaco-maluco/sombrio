@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
+  scale: 1,
   gridSize: 60,
   playerPosition: [3, 6],
   targetPosition: [0, 0],
