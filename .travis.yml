@@ -7,22 +7,21 @@ before_install:
   - brew update
 branches:
   only:
-    - master
-#    - /^v\d+(\.\d+)+$/
+    - /^v\d+(\.\d+)+$/
 jobs:
   include:
-    # - stage: Compile and Release app
-    #   script: ./scripts/deploy.sh
-    #   deploy:
-    #     provider: releases
-    #     api_key: $GITHUB_OAUTH_TOKEN
-    #     file:
-    #       - "dist/Sombrio-darwin-x64.zip"
-    #       - "dist/Sombrio-linux-x64.zip"
-    #       - "dist/Sombrio-win32-x64.zip"
-    #     skip_cleanup: true
-    #     on:
-    #       tags: true
+    - stage: Compile and Release app
+      script: ./scripts/deploy.sh
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        file:
+          - "dist/Sombrio-darwin-x64.zip"
+          - "dist/Sombrio-linux-x64.zip"
+          - "dist/Sombrio-win32-x64.zip"
+        skip_cleanup: true
+        on:
+          tags: true
     - stage: Build Sombrio Website
       script:
         - env
@@ -34,7 +33,6 @@ jobs:
         - rm -rf *.css *.map *.js *.html *.yml *.json *.php website/
         - unzip -o website.zip
         - rm *.zip
-        - ls -al
         - git add .
         - git commit -am "Deploying website ${TRAVIS_BRANCH}"
         - git remote add origin-pages https://$GITHUB_OAUTH_TOKEN@github.com/Hackbit/nko2017-sombrio.git > /dev/null 2>&1
