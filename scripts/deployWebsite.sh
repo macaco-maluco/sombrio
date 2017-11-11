@@ -13,7 +13,7 @@ mkdir build-website
 
 cp -r website/dist/* build-website/
 cp website/index.php build-website/index.php
-cp website/Composer.json build-website/Composer.json
+cp website/composer.json build-website/composer.json
 
 pushd build-website && zip -r website.zip ./ && popd
 mv build-website/website.zip .
