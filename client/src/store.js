@@ -51,10 +51,16 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CLICK_SCREEN':
+    case 'MOVE_TO_PIXELS':
       return {
         ...state,
         targetPosition: fromPixels(action.payload),
+      }
+
+    case 'MODIFY_IN_PIXELS':
+      return {
+        ...state,
+        objects: [...state.objects, { type: 'wall', position: fromPixels(action.payload) }],
       }
 
     case 'TICK':
@@ -106,7 +112,9 @@ export const findPlayerPath = state => {
   return finder.findPath(...state.playerPosition, ...state.targetPosition, grid)
 }
 
-export const clickScreen = position => ({ type: 'CLICK_SCREEN', payload: position })
+export const moveToPixels = position => ({ type: 'MOVE_TO_PIXELS', payload: position })
+
+export const modifyInPixels = position => ({ type: 'MODIFY_IN_PIXELS', payload: position })
 
 const store = createStore(reducer)
 

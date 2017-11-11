@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  clickScreen,
+  moveToPixels,
+  modifyInPixels,
   objectsInPixes,
   playerInPixels,
   monsterInPixels,
@@ -52,13 +53,15 @@ const App = ({
   playerPosition,
   monsterPosition,
   targetPosition,
-  onClick,
+  onMove,
+  onModify,
 }) => (
   <svg
     width={width}
     height={height}
     style={styles.svg}
-    onClick={e => onClick([e.clientX, e.clientY])}
+    onContextMenu={e => onModify([e.clientX, e.clientY])}
+    onClick={e => onMove([e.clientX, e.clientY])}
   >
     <Target position={targetPosition} />
     <Player position={playerPosition} />
@@ -77,7 +80,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onClick: positionInPixels => dispatch(clickScreen(positionInPixels)),
+  onMove: positionInPixels => dispatch(moveToPixels(positionInPixels)),
+  onModify: positionInPixels => dispatch(modifyInPixels(positionInPixels)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
