@@ -5,7 +5,4 @@ node_js:
 jobs:
   include:
     - stage: Compile app
-      script: rvm use ruby-2.3.1
-    - script: brew install yarn
-    - script: ./scripts/install.sh
-    - script: ./scripts/distribute.sh
+      script: ./scripts/deploy.sh
