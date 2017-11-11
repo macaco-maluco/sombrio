@@ -12,6 +12,14 @@ const initialState = {
   },
   objects: [
     // this is a line
+    { type: 'wall', x: 8, y: 1 },
+    { type: 'wall', x: 9, y: 1 },
+    { type: 'wall', x: 10, y: 1 },
+    { type: 'wall', x: 11, y: 1 },
+    { type: 'wall', x: 12, y: 1 },
+    { type: 'wall', x: 13, y: 1 },
+
+    // this is a line
     { type: 'wall', x: 1, y: 1 },
     { type: 'wall', x: 1, y: 2 },
     { type: 'wall', x: 1, y: 3 },
@@ -29,6 +37,14 @@ const initialState = {
     { type: 'wall', x: 7, y: 1 },
     { type: 'wall', x: 7, y: 2 },
     { type: 'wall', x: 7, y: 3 },
+
+    // this is a line
+    { type: 'wall', x: 7, y: 4 },
+    { type: 'wall', x: 7, y: 5 },
+    { type: 'wall', x: 7, y: 6 },
+    { type: 'wall', x: 7, y: 7 },
+    { type: 'wall', x: 7, y: 8 },
+    { type: 'wall', x: 7, y: 9 },
   ],
 }
 
