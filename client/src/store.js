@@ -3,10 +3,7 @@ import PF from 'pathfinding'
 import { createStore } from 'redux'
 
 export const initialState = {
-  window: {
-    width: window.innerWidth,
-    height: window.innerHeight,
-  },
+  windowSize: [window.innerWidth, window.innerHeight],
   gridSize: 60,
   width: 30,
   height: 30,
@@ -87,6 +84,13 @@ export const reducer = (state = initialState, action) => {
       }
     }
 
+    case 'RESIZE_WINDOW': {
+      return {
+        ...state,
+        windowSize: action.payload,
+      }
+    }
+
     case 'TICK': {
       return {
         ...state,
@@ -162,6 +166,8 @@ export const tick = () => ({
   type: 'TICK',
   payload: Date.now(),
 })
+
+export const resizeWindow = size => ({ type: 'RESIZE_WINDOW', payload: size })
 
 const store = createStore(reducer)
 

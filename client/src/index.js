@@ -5,9 +5,11 @@ import App from './components/App'
 import store from './store'
 import tick from './effects/tick'
 import ipc from './effects/ipc'
+import resize from './effects/resize'
 
 tick(store)
 ipc(store)
+resize(store)
 
 render(
   <Provider store={store}>

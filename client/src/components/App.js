@@ -71,8 +71,8 @@ const App = ({
 )
 
 const mapStateToProps = state => ({
-  width: state.window.width,
-  height: state.window.height,
+  width: state.windowSize[0],
+  height: state.windowSize[1],
   objects: objectsInPixes(state),
   playerPosition: playerInPixels(state),
   monsterPosition: monsterInPixels(state),
