@@ -9,8 +9,8 @@ export const initialState = {
     height: window.innerHeight,
   },
   gridSize: 60,
-  width: 11,
-  height: 11,
+  width: 30,
+  height: 30,
   playerPosition: [3, 6],
   targetPosition: [0, 0],
   monsterPosition: [8, 6],
@@ -51,6 +51,12 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'CLICK_SCREEN':
+      return {
+        ...state,
+        targetPosition: fromPixels(action.payload),
+      }
+
     case 'TICK':
       return {
         ...state,
@@ -75,6 +81,7 @@ export const grid2d = state => {
 }
 
 export const toPixels = x => x.map(y => y * 60)
+export const fromPixels = x => x.map(y => Math.floor(y / 60))
 
 export const objectsInPixes = state =>
   state.objects.map(object => ({ ...object, position: toPixels(object.position) }))
@@ -98,6 +105,8 @@ export const findPlayerPath = state => {
 
   return finder.findPath(...state.playerPosition, ...state.targetPosition, grid)
 }
+
+export const clickScreen = position => ({ type: 'CLICK_SCREEN', payload: position })
 
 const store = createStore(reducer)
 

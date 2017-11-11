@@ -1,6 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { objectsInPixes, playerInPixels, monsterInPixels, targetInPixel } from '../store'
+import {
+  clickScreen,
+  objectsInPixes,
+  playerInPixels,
+  monsterInPixels,
+  targetInPixel,
+} from '../store'
 
 const styles = {
   svg: {
@@ -39,8 +45,21 @@ const Monster = ({ position }) => (
   </g>
 )
 
-const App = ({ width, height, objects, playerPosition, monsterPosition, targetPosition }) => (
-  <svg width={width} height={height} style={styles.svg}>
+const App = ({
+  width,
+  height,
+  objects,
+  playerPosition,
+  monsterPosition,
+  targetPosition,
+  onClick,
+}) => (
+  <svg
+    width={width}
+    height={height}
+    style={styles.svg}
+    onClick={e => onClick([e.clientX, e.clientY])}
+  >
     <Target position={targetPosition} />
     <Player position={playerPosition} />
     <Monster position={monsterPosition} />
@@ -57,6 +76,8 @@ const mapStateToProps = state => ({
   targetPosition: targetInPixel(state),
 })
 
-const mapDispatchToProps = () => ({})
+const mapDispatchToProps = dispatch => ({
+  onClick: positionInPixels => dispatch(clickScreen(positionInPixels)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
