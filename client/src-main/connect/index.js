@@ -1,10 +1,10 @@
-const ssbClient = require('ssb-client')
 const observeFeed = require('./observeFeed')
 const publishWall = require('./publishWall')
+const party = require('ssb-party')
 
 module.exports = () =>
   new Promise((resolve, reject) => {
-    ssbClient(function(err, sbot) {
+    party(function(err, sbot) {
       if (err) return reject(err)
 
       console.log('connected as', sbot.id)
