@@ -2,8 +2,10 @@ const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
 
+const env = process.env.NODE_ENV
+
 const appPath =
-  process.env.NODE_ENV === 'production'
+  env === 'production'
     ? `file://${path.resolve(__dirname, '../dist/app.asar')}/index.html`
     : url.format({
         pathname: 'localhost:3000/index.html',
@@ -23,7 +25,7 @@ function createWindow() {
   win.loadURL(appPath)
 
   // Open the DevTools.
-  if (process.env.NODE_ENV === 'development') {
+  if (env === 'development') {
     win.webContents.openDevTools()
   }
 

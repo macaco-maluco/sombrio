@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "Sombrio",
   "version": "1.0.0",
   "main": "src-main/index.js",
   "license": "MIT",
@@ -19,16 +19,17 @@
   },
   "devDependencies": {
     "asar": "^0.14.0",
-    "sagui": "^11.4.2"
-  },
-  "dependencies": {
-    "electron": "^1.7.9",
+    "electron-packager": "^9.1.0",
     "pathfinding": "^0.4.18",
     "ramda": "^0.25.0",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-heat": "^0.4.0"
+    "redux-heat": "^0.4.0",
+    "sagui": "^11.4.2"
+  },
+  "dependencies": {
+    "electron": "^1.7.9"
   }
 }
