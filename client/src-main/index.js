@@ -30,15 +30,21 @@ function createWindow() {
   }
 
   connect().then(client => {
+    const buffer = []
+
     client.feed$.subscribe({
       next: content => {
-        console.log('content', content)
+        buffer.push(content)
         win.webContents.send('wall', content)
       },
       error: error => {
         console.log('error', error)
       },
       complete: () => console.log('done'),
+    })
+
+    ipcMain.on('app-ready', () => {
+      buffer.forEach(content => win.webContents.send('wall', content))
     })
 
     ipcMain.on('wall', (event, position) => {
