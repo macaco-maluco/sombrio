@@ -19,6 +19,8 @@
     "sagui": "^11.4.2"
   },
   "dependencies": {
-    "electron": "^1.7.9"
+    "electron": "^1.7.9",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0"
   }
 }
