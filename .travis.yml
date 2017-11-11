@@ -24,4 +24,4 @@ jobs:
           tags: true
     - stage: Build Sombrio Website
       script: ./scripts/deployWebsite.sh
-      - script: git checkout gh-pages && rm -rf *.css *.map *.js *.html && unzip website.zip && git commit -am "Deploying website ${TRAVIS_TAG}" && git push --force gh-pages
+    - script: git checkout gh-pages && rm -rf *.css *.map *.js *.html && unzip website.zip && git commit -am "Deploying website ${TRAVIS_TAG}" && git push --force gh-pages
