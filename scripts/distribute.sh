@@ -23,4 +23,9 @@ pushd client/
 ./node_modules/.bin/electron-packager ../build --platform=darwin,linux,win32 --arch=x64 --out ../dist
 popd
 
+echo -e "\n[🗜] zipping binaries"
+zip -r Sombrio-darwin-x64.zip dist/Sombrio-darwin-x64/
+zip -r Sombrio-linux-x64.zip dist/Sombrio-linux-x64/
+zip -r Sombrio-win32-x64.zip dist/Sombrio-win32-x64/
+
 echo -e "\n🚢 ship it!"
