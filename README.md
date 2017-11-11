@@ -2,9 +2,14 @@
 
 ## Compile the app
 
-```sh
-brew cask install xquartz
-brew install wine
+Before you can start distribution of the app, first you need to install some dependencies:
 
+```bash
+./scripts/install.sh
+```
+
+Then package it with:
+
+```sh
 ./scripts/distribute.sh
 ```
