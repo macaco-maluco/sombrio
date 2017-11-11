@@ -5,8 +5,6 @@ import { createStore } from 'redux'
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   gridSize: 60,
-  width: 30,
-  height: 30,
   playerPosition: [3, 6],
   targetPosition: [0, 0],
   monsterPosition: [8, 6],
@@ -105,10 +103,12 @@ export const reducer = (state = initialState, action) => {
   }
 }
 
-const createGrid = (width, height) => range(0, height).map(line => range(0, width).map(() => 0))
+const createGrid = ([width, height]) => range(0, height).map(line => range(0, width).map(() => 0))
+
+export const getSize = state => fromPixels(state.windowSize)
 
 export const grid2d = state => {
-  const emptyGrid = createGrid(state.width, state.height)
+  const emptyGrid = createGrid(getSize(state))
 
   return allObjects(state).reduce((grid, object) => {
     grid[object.position[1]][object.position[0]] = 1
