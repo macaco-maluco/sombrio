@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+TRAVIS_BRANCH=$1
+
 curl -o- -L https://yarnpkg.com/install.sh | bash
 export PATH=$HOME/.yarn/bin:$PATH
 
