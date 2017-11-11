@@ -1,8 +1,7 @@
 #!/bin/bash --login
 
 set -e
-
-rvm use ruby-2.3.1
-brew install yarn
+curl -o- -L https://yarnpkg.com/install.sh | bash
+export PATH=$HOME/.yarn/bin:$PATH
 ./scripts/install.sh
 ./scripts/distribute.sh
