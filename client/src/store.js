@@ -1,4 +1,4 @@
-import { range } from 'ramda'
+import { range, equals } from 'ramda'
 import PF from 'pathfinding'
 import { createStore } from 'redux'
 import tickEffect from './effects/tick'
@@ -58,9 +58,15 @@ export const reducer = (state = initialState, action) => {
       }
 
     case 'MODIFY_IN_PIXELS':
+      const position = fromPixels(action.payload)
+      const objects = state.objects.filter(object => !equals(object.position, position))
+
       return {
         ...state,
-        objects: [...state.objects, { type: 'wall', position: fromPixels(action.payload) }],
+        objects:
+          objects.length !== state.objects.length
+            ? objects
+            : [...state.objects, { type: 'wall', position }],
       }
 
     case 'TICK':
