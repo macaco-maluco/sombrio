@@ -86,7 +86,7 @@ const App = ({
     <Target position={targetPosition} />
     <Player position={playerPosition} />
     <Monster position={monsterPosition} />
-    {objects.map(({ position }) => <Wall position={position} />)}
+    {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
   </svg>
 )
 
