@@ -20,7 +20,7 @@ pushd build/ && yarn install --prod && popd
 echo -e "\n[🔨] compile native apps"
 rm -rf dist/
 pushd client/
-./node_modules/.bin/electron-packager ../build --all --out ../dist
+./node_modules/.bin/electron-packager ../build --platform=darwin,linux,win32 --arch=x64 --out ../dist
 popd
 
 echo -e "\n🚢 ship it!"
