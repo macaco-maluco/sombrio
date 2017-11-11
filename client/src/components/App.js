@@ -31,7 +31,6 @@ const Wall = ({ position }) => (
 const Target = ({ position }) => (
   <g
     style={{
-      transition: 'transform 1s linear',
       transform: `translate(${position[0]}px, ${position[1]}px)`,
     }}
   >
