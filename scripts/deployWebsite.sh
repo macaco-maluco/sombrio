@@ -9,8 +9,8 @@ GITHUB_DOWNLOAD="https://github.com/Hackbit/nko2017-sombrio/releases/download"
 
 export APP_VERSION=${TRAVIS_BRANCH}
 export MAC_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-darwin-x64.zip"
-export WINDOWS_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-linux-x64.zip"
-export LINUX_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-win32-x64.zip"
+export WINDOWS_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-win32-x64.zip"
+export LINUX_DOWNLOAD_URL="${GITHUB_DOWNLOAD}/${TRAVIS_BRANCH}/Sombrio-linux-x64.zip"
 
 pushd website && yarn install && yarn dist && popd
 
