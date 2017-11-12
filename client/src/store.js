@@ -58,9 +58,13 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'MOVE_TO_PIXELS': {
+      const targetPosition = fromPixels(action.payload)
+      targetPosition[0] = Math.min(Math.max(targetPosition[0], 0), 200)
+      targetPosition[1] = Math.min(Math.max(targetPosition[1], 0), 200)
+
       return {
         ...state,
-        targetPosition: fromPixels(action.payload),
+        targetPosition: targetPosition,
       }
     }
 
@@ -112,9 +116,9 @@ const createGrid = ([width, height]) => range(0, height).map(line => range(0, wi
 export const getSize = state => fromPixels(state.windowSize)
 
 export const grid2d = state => {
-  const emptyGrid = createGrid(getSize(state))
+  const emptyGrid = createGrid([200, 200])
 
-  return allObjects(state).reduce((grid, object) => {
+  return allValidObjects(state).reduce((grid, object) => {
     grid[object.position[1]][object.position[0]] = 1
     return grid
   }, emptyGrid)
@@ -125,19 +129,27 @@ export const getFirstStagedModification = state => state.stagedModifications[0]
 export const toPixels = x => x.map(y => y * 60)
 export const fromPixels = x => x.map(y => Math.floor(y / 60))
 
-export const allObjects = state =>
-  state.stagedModifications.reduce((objects, stagedModification) => {
-    const filteredObjects = objects.filter(
-      object => !equals(object.position, stagedModification.position)
+export const allValidObjects = state =>
+  state.stagedModifications
+    .reduce((objects, stagedModification) => {
+      const filteredObjects = objects.filter(
+        object => !equals(object.position, stagedModification.position)
+      )
+
+      return filteredObjects.length !== objects.length
+        ? filteredObjects
+        : [...objects, stagedModification]
+    }, state.objects)
+    .filter(
+      object =>
+        object.position[0] > 0 &&
+        object.position[0] < 200 &&
+        object.position[1] > 0 &&
+        object.position[0] < 200
     )
 
-    return filteredObjects.length !== objects.length
-      ? filteredObjects
-      : [...objects, stagedModification]
-  }, state.objects)
-
 export const objectsInPixes = state =>
-  allObjects(state).map(object => ({ ...object, position: toPixels(object.position) }))
+  allValidObjects(state).map(object => ({ ...object, position: toPixels(object.position) }))
 
 export const playerInPixels = state => toPixels(state.playerPosition)
 
