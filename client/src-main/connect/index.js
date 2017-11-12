@@ -5,6 +5,7 @@ const env = require('../env')
 const observeFeed = require('./observeFeed')
 const publishTombstone = require('./publishTombstone')
 const publishWall = require('./publishWall')
+const publishScore = require('./publishScore')
 
 module.exports = () =>
   new Promise((resolve, reject) => {
@@ -19,6 +20,7 @@ module.exports = () =>
         feed$,
         publishTombstone: publishTombstone(sbot),
         publishWall: publishWall(sbot),
+        publishScore: publishScore(sbot),
         child,
       })
     }

@@ -5,6 +5,7 @@ import GameOverOverlay from './GameOverOverlay'
 import StartScreenOverlay from './StartScreenOverlay'
 import {
   moveToPixels,
+  getLeaderboard,
   stageModificationInPixels,
   objectsInPixes,
   playerInPixels,
@@ -140,6 +141,7 @@ const App = ({
   onStart,
   scale,
   score,
+  leaderboard,
 }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
     {gameOver ||
@@ -162,7 +164,13 @@ const App = ({
       )}
 
     {gameOver && (
-      <GameOverOverlay score={score} onResurrect={onResurrect} width={width} height={height} />
+      <GameOverOverlay
+        score={score}
+        leaderboard={leaderboard}
+        onResurrect={onResurrect}
+        width={width}
+        height={height}
+      />
     )}
     {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
     <Motion
@@ -224,6 +232,7 @@ const mapStateToProps = state => ({
   gameOver: state.gameOver,
   tombstones: tombstonesInPixels(state),
   score: calculateScore(state),
+  leaderboard: getLeaderboard(state),
 })
 
 const mapDispatchToProps = dispatch => ({

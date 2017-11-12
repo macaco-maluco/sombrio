@@ -9,13 +9,14 @@ import ipc from './effects/ipc'
 import resize from './effects/resize'
 import publishTombstone from './heats/publishTombstone'
 import publishWall from './heats/publishWall'
+import publishScore from './heats/publishScore'
 import indieFlowerFont from './IndieFlower.ttf'
 import digitaldreamfat from './digitaldreamfat.ttf'
 
 tick(store)
 ipc(store)
 resize(store)
-subscribe(store, [publishTombstone, publishWall])
+subscribe(store, [publishTombstone, publishWall, publishScore])
 
 render(
   <Provider store={store}>

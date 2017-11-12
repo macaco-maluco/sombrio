@@ -20,6 +20,7 @@ export const initialState = {
   scale: 1,
   gridSize: 60,
   playerPosition,
+  scores: [],
   targetPosition: [GRID_SIZE / 2 - 3, GRID_SIZE / 2 + 3],
   monsterPosition: randomPosition(playerPosition),
   tickCount: 0,
@@ -83,6 +84,16 @@ export const reducer = (state = initialState, action) => {
         playerPosition: initialState.playerPosition,
         targetPosition: initialState.targetPosition,
         monsterPosition: randomPosition(initialState.playerPosition),
+      }
+    }
+
+    case 'ADD_SCORE': {
+      return {
+        ...state,
+        scores: [
+          ...state.scores,
+          { playerId: action.payload.playerId, score: action.payload.score },
+        ],
       }
     }
 
@@ -256,6 +267,9 @@ export const findMonsterPath = state => {
   return finder.findPath(...state.monsterPosition, ...state.playerPosition, grid)
 }
 
+export const getLeaderboard = state =>
+  [...state.scores].sort((a, b) => b.score - a.score).slice(0, 5)
+
 export const findPlayerPath = state => {
   const grid = new PF.Grid(grid2d(state))
   const finder = new PF.AStarFinder()
@@ -288,6 +302,8 @@ export const start = () => ({
 })
 
 export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
+
+export const addScore = scoreWithPlayerId => ({ type: 'ADD_SCORE', payload: scoreWithPlayerId })
 
 export const resizeWindow = size => ({ type: 'RESIZE_WINDOW', payload: size })
 

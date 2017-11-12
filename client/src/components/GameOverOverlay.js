@@ -4,6 +4,7 @@ const Resurrect = ({ onClick }) => (
   <button
     onClick={onClick}
     style={{
+      marginTop: 30,
       cursor: 'pointer',
       backgroundColor: '#ACE000',
       padding: '20px 40px',
@@ -49,11 +50,34 @@ const style = ({ width, height }) => ({
   flexDirection: 'row',
 })
 
-const GameOverOverlay = ({ score, width, height, onResurrect }) => (
+const Leaderboard = ({ leaderboard }) => [
+  <h1 style={{ fontSize: 30 }}>Leaderboard</h1>,
+  <table style={{ width: '100%' }}>
+    <thead>
+      <tr>
+        <th style={{ paddingBottom: 10, textAlign: 'left', fontSize: 20 }}>Player</th>
+        <th style={{ paddingBottom: 10, textAlign: 'right', fontSize: 20 }}>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {leaderboard.map(entry => (
+        <tr>
+          <td style={{ paddingBottom: 10, textAlign: 'left', fontSize: 20 }}>
+            {entry.playerId.slice(0, 6)}
+          </td>
+          <td style={{ paddingBottom: 10, textAlign: 'right', fontSize: 20 }}>{entry.score}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>,
+]
+
+const GameOverOverlay = ({ score, width, height, onResurrect, leaderboard }) => (
   <div style={style({ width, height })}>
     <Tombstone width={width} height={height} />
     <div style={{ color: 'white' }}>
-      <h1>You survived {score} seconds</h1>
+      <h1 style={{ fontSize: 50 }}>You survived {score} seconds</h1>
+      <Leaderboard leaderboard={leaderboard} />
       <Resurrect onClick={onResurrect} />
     </div>
   </div>

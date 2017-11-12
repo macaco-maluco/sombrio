@@ -40,8 +40,10 @@ function createWindow() {
 
     client.feed$.subscribe({
       next: content => {
-        buffer.push(content)
         const type = R.path(['value', 'content', 'type'], content)
+        if (!type.match(/macaco_maluco-sombrio/)) return
+
+        buffer.push(content)
 
         switch (type) {
           case 'macaco_maluco-sombrio-tombstone':
@@ -49,6 +51,9 @@ function createWindow() {
             break
           case 'macaco_maluco-sombrio-wall':
             win.webContents.send('wall', content)
+            break
+          case 'macaco_maluco-sombrio-score':
+            win.webContents.send('score', content)
             break
         }
       },
@@ -69,12 +74,19 @@ function createWindow() {
           case 'macaco_maluco-sombrio-wall':
             win.webContents.send('wall', content)
             break
+          case 'macaco_maluco-sombrio-score':
+            win.webContents.send('score', content)
+            break
         }
       })
     })
 
     ipcMain.on('wall', (event, position) => {
       client.publishWall(position)
+    })
+
+    ipcMain.on('score', (event, score) => {
+      client.publishScore(score)
     })
 
     ipcMain.on('tombstone', (event, position) => {
