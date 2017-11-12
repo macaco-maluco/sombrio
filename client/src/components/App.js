@@ -2,6 +2,7 @@ import React from 'react'
 import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
 import GameOverOverlay from './GameOverOverlay'
+import StartScreenOverlay from './StartScreenOverlay'
 import {
   moveToPixels,
   stageModificationInPixels,
@@ -11,6 +12,7 @@ import {
   targetInPixel,
   resurrect,
   tombstonesInPixels,
+  start,
 } from '../store'
 
 const styles = {
@@ -118,13 +120,16 @@ const App = ({
   monsterPosition,
   targetPosition,
   tombstones,
+  started,
   onMove,
   onModify,
   onResurrect,
+  onStart,
   scale,
 }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
     {gameOver && <GameOverOverlay onResurrect={onResurrect} width={width} height={height} />}
+    {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
     <Motion
       defaultStyle={{
         x: targetPosition[0],
@@ -176,6 +181,7 @@ const mapStateToProps = state => ({
   monsterPosition: monsterInPixels(state),
   targetPosition: targetInPixel(state),
   scale: state.scale,
+  started: state.started,
   gameOver: state.gameOver,
   tombstones: tombstonesInPixels(state),
 })
@@ -184,6 +190,7 @@ const mapDispatchToProps = dispatch => ({
   onMove: positionInPixels => dispatch(moveToPixels(positionInPixels)),
   onModify: positionInPixels => dispatch(stageModificationInPixels(positionInPixels)),
   onResurrect: () => dispatch(resurrect()),
+  onStart: () => dispatch(start()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

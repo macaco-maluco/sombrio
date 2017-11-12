@@ -13,6 +13,7 @@ export const initialState = {
   tickCount: 0,
   stagedModifications: [],
   gameOver: false,
+  started: false,
   tombstones: [],
   objects: [
     // this is a line
@@ -51,6 +52,13 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'START': {
+      return {
+        ...state,
+        started: true
+      }
+    }
+
     case 'ARISE!!': {
       return {
         ...state,
@@ -68,7 +76,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'STAGE_MODIFICATION_IN_PIXELS': {
-      if (state.gameOver) {
+      if (state.gameOver || !state.started) {
         return state
       }
 
@@ -101,7 +109,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'MOVE_TO_PIXELS': {
-      if (state.gameOver) {
+      if (state.gameOver || !state.started) {
         return state
       }
 
@@ -123,7 +131,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'TICK': {
-      if (state.gameOver) {
+      if (state.gameOver || !state.started) {
         return state
       }
 
@@ -226,6 +234,10 @@ export const tick = () => ({
 
 export const resurrect = () => ({
   type: 'ARISE!!',
+})
+
+export const start = () => ({
+  type: 'START'
 })
 
 export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
