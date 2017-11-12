@@ -16,8 +16,14 @@ Then package it with:
 
 ## Attributions
 
-Logo:
+Logo and Monster:
 
 Cute Monster
 By Symbolon, IT
 https://thenounproject.com/term/cute-monster/831319/
+
+Player:
+
+Eyes
+By Sean Maldjian, US
+https://thenounproject.com/term/eyes/912607/
