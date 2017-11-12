@@ -20,6 +20,7 @@ export const initialState = {
   scale: 1,
   gridSize: 60,
   playerPosition,
+  playerId: '',
   scores: [],
   targetPosition: [GRID_SIZE / 2 - 3, GRID_SIZE / 2 + 3],
   monsterPosition: randomPosition(playerPosition),

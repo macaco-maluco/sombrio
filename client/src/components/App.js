@@ -142,6 +142,7 @@ const App = ({
   scale,
   score,
   leaderboard,
+  playerId,
 }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
     {gameOver ||
@@ -173,6 +174,11 @@ const App = ({
       />
     )}
     {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
+
+    <div style={{ position: 'absolute', top: 20, left: 20, color: 'white' }}>
+      Player name: {playerId.slice(0, 5)}
+    </div>
+
     <Motion
       defaultStyle={{
         x: targetPosition[0],
@@ -233,6 +239,7 @@ const mapStateToProps = state => ({
   tombstones: tombstonesInPixels(state),
   score: calculateScore(state),
   leaderboard: getLeaderboard(state),
+  playerId: state.playerId,
 })
 
 const mapDispatchToProps = dispatch => ({
