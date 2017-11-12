@@ -3,17 +3,19 @@ import PF from 'pathfinding'
 import { createStore } from 'redux'
 import uuid from 'uuid/v4'
 
+const GRID_SIZE = 200
+
 const randomPosition = () => [
-  Math.min(Math.round(Math.random(200) * 100), 200),
-  Math.min(Math.round(Math.random(200) * 100), 200),
+  Math.min(Math.round(Math.random(GRID_SIZE) * 100), GRID_SIZE),
+  Math.min(Math.round(Math.random(GRID_SIZE) * 100), GRID_SIZE),
 ]
 
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   scale: 1,
   gridSize: 60,
-  playerPosition: [3, 6],
-  targetPosition: [4, 4],
+  playerPosition: [GRID_SIZE / 2, GRID_SIZE / 2],
+  targetPosition: [GRID_SIZE / 2 - 3, GRID_SIZE / 2 + 3],
   monsterPosition: randomPosition(),
   tickCount: 0,
   stagedModifications: [],
@@ -120,8 +122,8 @@ export const reducer = (state = initialState, action) => {
       }
 
       const targetPosition = fromPixels(action.payload)
-      targetPosition[0] = Math.min(Math.max(targetPosition[0], 0), 200)
-      targetPosition[1] = Math.min(Math.max(targetPosition[1], 0), 200)
+      targetPosition[0] = Math.min(Math.max(targetPosition[0], 0), GRID_SIZE)
+      targetPosition[1] = Math.min(Math.max(targetPosition[1], 0), GRID_SIZE)
 
       return {
         ...state,
@@ -173,7 +175,7 @@ const createGrid = ([width, height]) => range(0, height).map(line => range(0, wi
 export const getSize = state => fromPixels(state.windowSize)
 
 export const grid2d = state => {
-  const emptyGrid = createGrid([200, 200])
+  const emptyGrid = createGrid([GRID_SIZE, GRID_SIZE])
 
   return allValidObjects(state).reduce((grid, object) => {
     grid[object.position[1]][object.position[0]] = 1
@@ -200,9 +202,9 @@ export const allValidObjects = state =>
     .filter(
       object =>
         object.position[0] > -1 &&
-        object.position[0] < 200 &&
+        object.position[0] < GRID_SIZE &&
         object.position[1] > -1 &&
-        object.position[0] < 200
+        object.position[0] < GRID_SIZE
     )
 
 export const objectsInPixes = state =>
