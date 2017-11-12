@@ -9,6 +9,7 @@ import ipc from './effects/ipc'
 import resize from './effects/resize'
 import publishTombstone from './heats/publishTombstone'
 import publishWall from './heats/publishWall'
+import indieFlowerFont from './IndieFlower.ttf'
 
 tick(store)
 ipc(store)
@@ -17,7 +18,15 @@ subscribe(store, [publishTombstone, publishWall])
 
 render(
   <Provider store={store}>
-    <App />
+    <div>
+      <style>
+        {`@font-face {
+      font-family: 'Indie Flower';
+      src: url('${indieFlowerFont}')  format('truetype');
+    }`}
+      </style>
+      <App />
+    </div>
   </Provider>,
   document.getElementById('root')
 )
