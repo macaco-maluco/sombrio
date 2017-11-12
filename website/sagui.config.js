@@ -15,6 +15,7 @@ module.exports = {
         'process.env.MAC_DOWNLOAD_URL': JSON.stringify(process.env.MAC_DOWNLOAD_URL),
         'process.env.WINDOWS_DOWNLOAD_URL': JSON.stringify(process.env.WINDOWS_DOWNLOAD_URL),
         'process.env.LINUX_DOWNLOAD_URL': JSON.stringify(process.env.LINUX_DOWNLOAD_URL),
+        'process.env.APP_VERSION': JSON.stringify(process.env.APP_VERSION),
       }),
     ],
   },
