@@ -55,7 +55,7 @@ export const reducer = (state = initialState, action) => {
     case 'START': {
       return {
         ...state,
-        started: true
+        started: true,
       }
     }
 
@@ -71,7 +71,7 @@ export const reducer = (state = initialState, action) => {
     case 'ADD_TOMBSTONE': {
       return {
         ...state,
-        tombstones: [...state.tombstones, {type: 'tombstone', position: action.payload}]
+        tombstones: [...state.tombstones, { type: 'tombstone', position: action.payload }],
       }
     }
 
@@ -138,8 +138,14 @@ export const reducer = (state = initialState, action) => {
       // FIXME: check also if they will collide in the next
       // make the state available in the window for debugging
       window.state = state
-      const monsterPosition = state.tickCount % 2 === 0 ? findMonsterPath(state)[1] || state.monsterPosition : state.monsterPosition
-      const playerPosition = state.tickCount % 3 === 0 ? findPlayerPath(state)[1] || state.playerPosition : state.playerPosition
+      const monsterPosition =
+        state.tickCount % 2 === 0
+          ? findMonsterPath(state)[1] || state.monsterPosition
+          : state.monsterPosition
+      const playerPosition =
+        state.tickCount % 3 === 0
+          ? findPlayerPath(state)[1] || state.playerPosition
+          : state.playerPosition
 
       return {
         ...state,
@@ -196,7 +202,8 @@ export const allValidObjects = state =>
 export const objectsInPixes = state =>
   allValidObjects(state).map(object => ({ ...object, position: toPixels(object.position) }))
 
-export const tombstonesInPixels = state => uniq(state.tombstones).map(object => ({ ...object, position: toPixels(object.position) }))
+export const tombstonesInPixels = state =>
+  uniq(state.tombstones).map(object => ({ ...object, position: toPixels(object.position) }))
 
 export const playerInPixels = state => toPixels(state.playerPosition)
 
@@ -237,7 +244,7 @@ export const resurrect = () => ({
 })
 
 export const start = () => ({
-  type: 'START'
+  type: 'START',
 })
 
 export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
