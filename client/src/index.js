@@ -12,7 +12,7 @@ import publishWall from './heats/publishWall'
 import indieFlowerFont from './IndieFlower.ttf'
 
 tick(store)
-// ipc(store)
+ipc(store)
 resize(store)
 subscribe(store, [publishTombstone, publishWall])
 
