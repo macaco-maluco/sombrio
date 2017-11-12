@@ -10,6 +10,7 @@ export const initialState = {
   playerPosition: [3, 6],
   targetPosition: [4, 4],
   monsterPosition: [8, 6],
+  tickCount: 0,
   stagedModifications: [],
   gameOver: false,
   tombstones: [],
@@ -129,14 +130,15 @@ export const reducer = (state = initialState, action) => {
       // FIXME: check also if they will collide in the next
       // make the state available in the window for debugging
       window.state = state
-      const monsterPosition = findMonsterPath(state)[1] || state.monsterPosition
-      const playerPosition = findPlayerPath(state)[1] || state.playerPosition
+      const monsterPosition = state.tickCount % 2 === 0 ? findMonsterPath(state)[1] || state.monsterPosition : state.monsterPosition
+      const playerPosition = state.tickCount % 3 === 0 ? findPlayerPath(state)[1] || state.playerPosition : state.playerPosition
 
       return {
         ...state,
         monsterPosition,
         playerPosition,
         gameOver: equals(monsterPosition, playerPosition),
+        tickCount: state.tickCount + 1,
       }
     }
 
