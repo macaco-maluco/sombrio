@@ -22,7 +22,7 @@ https://sombrio.herokuapp.com/
 
 There are three ways of playing this game:
 
-1. Play it by your by downloading the app and running it locally.
+1. Play it by yourself by downloading the app and running it locally.
 
 1. Play with friends in a local network. Fire the app and changes to the world will be seen by all players.  
 
