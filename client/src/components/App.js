@@ -149,6 +149,7 @@ const App = ({
       !started || (
         <div
           style={{
+            pointerEvents: 'none',
             position: 'absolute',
             left: 20,
             top: 20,
@@ -175,7 +176,7 @@ const App = ({
     )}
     {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
 
-    <div style={{ position: 'absolute', top: 20, left: 20, color: 'white' }}>
+    <div style={{ pointerEvents: 'none', position: 'absolute', top: 20, left: 20, color: 'white' }}>
       Player name: {playerId.slice(0, 5)}
     </div>
 
