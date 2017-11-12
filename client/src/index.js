@@ -11,7 +11,7 @@ import publishTombstone from './heats/publishTombstone'
 import publishWall from './heats/publishWall'
 
 tick(store)
-ipc(store)
+// ipc(store)
 resize(store)
 subscribe(store, [publishTombstone, publishWall])
 

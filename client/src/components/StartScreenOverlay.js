@@ -21,7 +21,7 @@ const Monster = ({ width, height }) => {
   const size = Math.floor(Math.min(width, height) / 2)
   return (
     <svg viewBox="0 0 40 40" width={`${size}`} height={`${size}`}>
-      <g id="monster" style={{ fill: '#ACE000' }}>
+      <g id="monster" style={{transform: 'translate(5px, 0)', fill: '#ACE000' }}>
         <path d="M8.70967742,6.19354839 C10.1290323,5.90322581 11.2258065,4.64516129 11.2258065,3.12903226 C11.2258065,1.41935484 9.80645161,3.55271368e-15 8.06451613,3.55271368e-15 C6.32258065,3.55271368e-15 4.90322581,1.38709677 4.90322581,3.12903226 C4.90322581,4.64516129 6,5.90322581 7.41935484,6.19354839 L7.41935484,10.0322581 C7.83870968,9.80645161 8.25806452,9.58064516 8.70967742,9.38709677 L8.70967742,6.19354839 Z" />
         <path d="M21.6129032,6.19354839 C23.0322581,5.90322581 24.1290323,4.64516129 24.1290323,3.12903226 C24.1290323,1.41935484 22.7096774,3.55271368e-15 20.9677419,3.55271368e-15 C19.2258065,3.55271368e-15 17.8064516,1.38709677 17.8064516,3.12903226 C17.8064516,4.64516129 18.8709677,5.90322581 20.3225806,6.19354839 L20.3225806,9.38709677 C20.7741935,9.58064516 21.1935484,9.80645161 21.6129032,10.0322581 L21.6129032,6.19354839 Z" />
         <path d="M17,24.1935484 C17,25.5483871 15.8709677,26.6451613 14.516129,26.6451613 C13.1612903,26.6451613 12.0322581,25.5483871 12.0322581,24.1935484 C12.0322581,22.8387097 13.1612903,21.7419355 14.516129,21.7419355 C15.8709677,21.7419355 17,22.8387097 17,24.1935484 Z" />
@@ -37,7 +37,7 @@ const style = ({ width, height }) => ({
   height: height - 120,
   left: 60,
   top: 60,
-  backgroundColor: 'rgba(255,255,255,.3)',
+  backgroundColor: 'rgba(0,0,0,.8)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -47,7 +47,15 @@ const style = ({ width, height }) => ({
 const StartScreenOverlay = ({ width, height, onStart }) => (
   <div style={style({ width, height })}>
     <Monster width={width} height={height} />
-    <div>
+    <div style={{width: (width / 2) - 180, fontSize: 18, color: 'white', fontFamily: "'Helvetica', 'Arial', 'sans-serif'"}}>
+      <h1>Welcome to Sombrio</h1>
+      <p>There is a Monster chasing you. Your objective is escaping your horrible fate by running around the strange Maze Reality you are in while building/removing walls. The longer you survive the better ;) </p>
+
+      <p>Some walls will vanish or appear now and then, blocking your way or heping you (who knows, huh?). It is the very magical nature of the Maze Reality affecting you. Only this is not completely true.</p>
+
+<p>Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut). To get most out of Sombrio and get the shared worlds created by all the Sombrio players, we recommend you to install Patchwork (https://github.com/ssbc/patchwork/releases/tag/v3.7.1) and join a Pub, such as ssb-pub.macacomaluco.space.</p>
+
+<p>If you just want to gather your friends and play, not installing anything else, simply join a LAN game (with lot less magic).</p>
       <StartGame onClick={onStart} />
     </div>
   </div>
