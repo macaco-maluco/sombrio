@@ -14,7 +14,7 @@ export default () => (
         Windows x64
       </a>
       <a className="download" href={process.env.LINUX_DOWNLOAD_URL || '#linux'}>
-        Linux x64
+        Linux x64 (*)
       </a>
     </div>
     <div
@@ -36,6 +36,8 @@ export default () => (
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
         color: '#FFFFFF',
         margin: '10px 0',
       }}
@@ -55,6 +57,14 @@ export default () => (
           Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut). Just gather your
           friends and play a LAN game.
         </p>
+      </div>
+      <div>
+        <h2>Linux preconditions</h2>
+        <p>
+          To run Sombrio on Linux you need to have <strong>libgconf-2.so.4</strong> installed.
+        </p>
+        <p>Example (Ubuntu):</p>
+        <pre>sudo apt-get install libgconf-2-4</pre>
       </div>
     </div>
   </div>
