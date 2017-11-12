@@ -13,6 +13,7 @@ import {
   resurrect,
   tombstonesInPixels,
   start,
+  calculateScore,
 } from '../store'
 
 const styles = {
@@ -138,9 +139,14 @@ const App = ({
   onResurrect,
   onStart,
   scale,
+  score,
 }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
-    {gameOver && <GameOverOverlay onResurrect={onResurrect} width={width} height={height} />}
+              {gameOver || !started || <div style={{ position: 'absolute', left: 20, top: 20, color: 'white', fontFamily: 'Helvetica', fontWeight: 'bold' }}>
+                {score}
+              </div>}
+
+    {gameOver && <GameOverOverlay score={score} onResurrect={onResurrect} width={width} height={height} />}
     {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
     <Motion
       defaultStyle={{
@@ -200,6 +206,7 @@ const mapStateToProps = state => ({
   started: state.started,
   gameOver: state.gameOver,
   tombstones: tombstonesInPixels(state),
+  score: calculateScore(state),
 })
 
 const mapDispatchToProps = dispatch => ({

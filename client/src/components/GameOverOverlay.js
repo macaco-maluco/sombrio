@@ -49,10 +49,11 @@ const style = ({ width, height }) => ({
   flexDirection: 'row',
 })
 
-const GameOverOverlay = ({ width, height, onResurrect }) => (
+const GameOverOverlay = ({ score, width, height, onResurrect }) => (
   <div style={style({ width, height })}>
     <Tombstone width={width} height={height} />
-    <div>
+    <div style={{color: 'white'}}>
+      <h1>You survived {score} seconds</h1>
       <Resurrect onClick={onResurrect} />
     </div>
   </div>

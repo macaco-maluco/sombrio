@@ -24,6 +24,9 @@ export const initialState = {
   monsterPosition: randomPosition(playerPosition),
   tickCount: 0,
   stagedModifications: [],
+  gameOverTimestamp: null,
+  currentTime: Date.now(),
+  startTimestamp: Date.now(),
   gameOver: false,
   started: false,
   tombstones: [],
@@ -68,6 +71,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         started: true,
+        startTimestamp: action.payload,
       }
     }
 
@@ -75,6 +79,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         gameOver: false,
+        startTimestamp: action.payload,
         playerPosition: initialState.playerPosition,
         targetPosition: initialState.targetPosition,
         monsterPosition: randomPosition(initialState.playerPosition),
@@ -145,7 +150,10 @@ export const reducer = (state = initialState, action) => {
 
     case 'TICK': {
       if (state.gameOver || !state.started) {
-        return state
+        return {
+          ...state,
+          currentTime: action.payload,
+        }
       }
 
       // FIXME: check also if they will collide in the next
@@ -164,8 +172,8 @@ export const reducer = (state = initialState, action) => {
         return {
           ...state,
           playerPosition,
-          gameOver: equals(monsterPosition, playerPosition),
           tickCount: state.tickCount + 1,
+          currentTime: action.payload,
           stagedModifications: [
             ...state.stagedModifications,
             { id: uuid(), type: 'wall', position: wallPosition.position },
@@ -173,10 +181,14 @@ export const reducer = (state = initialState, action) => {
         }
       }
 
+      const gameOver = equals(monsterPosition, playerPosition)
+
       return {
         ...state,
         monsterPosition,
         playerPosition,
+        currentTime: action.payload,
+        gameOverTimestamp: gameOver ? action.payload : state.gameOverTimestamp,
         gameOver: equals(monsterPosition, playerPosition),
         tickCount: state.tickCount + 1,
       }
@@ -267,10 +279,12 @@ export const tick = () => ({
 
 export const resurrect = () => ({
   type: 'ARISE!!',
+  payload: Date.now(),
 })
 
 export const start = () => ({
   type: 'START',
+  payload: Date.now(),
 })
 
 export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
@@ -297,6 +311,11 @@ const findIdealMonsterPath = state => {
 
   return finder.findPath(...state.monsterPosition, ...state.playerPosition, grid)
 }
+
+export const calculateScore = state =>
+  Math.floor((state.gameOver
+    ? state.gameOverTimestamp - state.startTimestamp
+    : state.currentTime - state.startTimestamp) / 1000)
 
 const store = createStore(reducer)
 
