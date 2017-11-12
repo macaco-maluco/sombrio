@@ -31,7 +31,6 @@
     "sagui": "^11.4.2"
   },
   "dependencies": {
-    "@klarna/higher-order-components": "^5.0.0",
     "@most/create": "^2.0.1",
     "most": "^1.7.2",
     "ramda": "^0.25.0",
