@@ -44,3 +44,8 @@ Gravestone:
 Gravestone
 By anbileru adaleru
 https://thenounproject.com/search/?q=gravestone&i=225333
+
+Resurrect:
+Resurrection
+By Andrew Doane
+https://thenounproject.com/search/?q=resurrect&i=912475

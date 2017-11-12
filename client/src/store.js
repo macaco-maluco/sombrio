@@ -49,6 +49,15 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'ARISE!!': {
+      return {
+        ...state,
+        gameOver: false,
+        playerPosition: initialState.playerPosition,
+        targetPosition: initialState.targetPosition,
+      }
+    }
+
     case 'STAGE_MODIFICATION_IN_PIXELS': {
       if (state.gameOver) {
         return state
@@ -109,6 +118,7 @@ export const reducer = (state = initialState, action) => {
         return state
       }
 
+      // FIXME: check also if they will collide in the next
       // make the state available in the window for debugging
       window.state = state
       const monsterPosition = findMonsterPath(state)[1] || state.monsterPosition
@@ -200,6 +210,10 @@ export const commitModification = position => ({ type: 'COMMIT_MODIFICATION', pa
 export const tick = () => ({
   type: 'TICK',
   payload: Date.now(),
+})
+
+export const resurrect = () => ({
+  type: 'ARISE!!',
 })
 
 export const resizeWindow = size => ({ type: 'RESIZE_WINDOW', payload: size })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
+import GameOverOverlay from './GameOverOverlay'
 import {
   moveToPixels,
   stageModificationInPixels,
@@ -8,6 +9,7 @@ import {
   playerInPixels,
   monsterInPixels,
   targetInPixel,
+  resurrect,
 } from '../store'
 
 const styles = {
@@ -116,47 +118,51 @@ const App = ({
   targetPosition,
   onMove,
   onModify,
+  onResurrect,
   scale,
 }) => (
-  <Motion
-    defaultStyle={{
-      x: targetPosition[0],
-      y: targetPosition[1],
-    }}
-    style={{
-      x: spring(targetPosition[0], { stiffness: 20, damping: 15 }),
-      y: spring(targetPosition[1], { stiffness: 20, damping: 15 }),
-    }}
-  >
-    {style => {
-      const x = style.x - width * scale / 2
-      const y = style.y - height * scale / 2
+  <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
+    {gameOver && <GameOverOverlay onResurrect={onResurrect} width={width} height={height} />}
+    <Motion
+      defaultStyle={{
+        x: targetPosition[0],
+        y: targetPosition[1],
+      }}
+      style={{
+        x: spring(targetPosition[0], { stiffness: 20, damping: 15 }),
+        y: spring(targetPosition[1], { stiffness: 20, damping: 15 }),
+      }}
+    >
+      {style => {
+        const x = style.x - width * scale / 2
+        const y = style.y - height * scale / 2
 
-      return (
-        <svg
-          viewBox={`${x} ${y} ${width * scale} ${height * scale}`}
-          width={width}
-          height={height}
-          style={styles.svg}
-          onContextMenu={e => onModify([e.clientX + x, e.clientY + y])}
-          onClick={e => onMove([e.clientX + x, e.clientY + y])}
-        >
-          {gameOver ? (
-            <Tombstone position={playerPosition} />
-          ) : (
-            <g>
-              <Target position={targetPosition} />
-              <Player position={playerPosition} />
-              <Monster position={monsterPosition} />
-            </g>
-          )}
+        return (
+          <svg
+            viewBox={`${x} ${y} ${width * scale} ${height * scale}`}
+            width={width}
+            height={height}
+            style={styles.svg}
+            onContextMenu={e => onModify([e.clientX + x, e.clientY + y])}
+            onClick={e => onMove([e.clientX + x, e.clientY + y])}
+          >
+            {gameOver ? (
+              <Tombstone position={playerPosition} />
+            ) : (
+              <g>
+                <Target position={targetPosition} />
+                <Player position={playerPosition} />
+                <Monster position={monsterPosition} />
+              </g>
+            )}
 
-          {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
-          <rect stroke="black" fill="none" x={0} y={0} width={200 * 60} height={200 * 60} />
-        </svg>
-      )
-    }}
-  </Motion>
+            {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
+            <rect stroke="black" fill="none" x={0} y={0} width={200 * 60} height={200 * 60} />
+          </svg>
+        )
+      }}
+    </Motion>
+  </div>
 )
 
 const mapStateToProps = state => ({
@@ -173,6 +179,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onMove: positionInPixels => dispatch(moveToPixels(positionInPixels)),
   onModify: positionInPixels => dispatch(stageModificationInPixels(positionInPixels)),
+  onResurrect: () => dispatch(resurrect()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
