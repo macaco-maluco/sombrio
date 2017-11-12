@@ -66,6 +66,7 @@ export default () => (
         <p>Example (Ubuntu):</p>
         <pre>sudo apt-get install libgconf-2-4</pre>
       </div>
+      <div id="hackbit-vote-widget" />
     </div>
   </div>
 )

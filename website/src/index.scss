@@ -15,8 +15,11 @@ body {
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  p, strong {
-    font-family: "Indie Flower", cursive;
+  padding: 20px;
+
+  p,
+  strong {
+    font-family: 'Indie Flower', cursive;
     font-size: 20px;
   }
 }
