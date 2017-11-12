@@ -27,3 +27,15 @@ Player:
 Eyes
 By Sean Maldjian, US
 https://thenounproject.com/term/eyes/912607/
+
+Walls:
+
+Blocks
+By Cris Dobbins, US
+https://thenounproject.com/search/?q=bricks&i=33639
+
+Pointer:
+
+Assembly Point
+By Ayub Irawan, ID
+https://thenounproject.com/search/?q=gathering%20point&i=1013299
