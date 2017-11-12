@@ -142,11 +142,25 @@ const App = ({
   score,
 }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width, height }}>
-              {gameOver || !started || <div style={{ position: 'absolute', left: 20, top: 20, color: 'white', fontFamily: 'Helvetica', fontWeight: 'bold' }}>
-                {score}
-              </div>}
+    {gameOver ||
+      !started || (
+        <div
+          style={{
+            position: 'absolute',
+            left: 20,
+            top: 20,
+            color: 'white',
+            fontFamily: 'Helvetica',
+            fontWeight: 'bold',
+          }}
+        >
+          {score}
+        </div>
+      )}
 
-    {gameOver && <GameOverOverlay score={score} onResurrect={onResurrect} width={width} height={height} />}
+    {gameOver && (
+      <GameOverOverlay score={score} onResurrect={onResurrect} width={width} height={height} />
+    )}
     {started || <StartScreenOverlay onStart={onStart} width={width} height={height} />}
     <Motion
       defaultStyle={{
