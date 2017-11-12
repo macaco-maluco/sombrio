@@ -13,6 +13,43 @@ const randomPosition = referencePosition => {
   ]
 }
 
+const generateInitialWalls = () => {
+  const center = GRID_SIZE / 2 - 5
+  return [
+    // this is a line
+    { type: 'wall', position: [center + 8, center] },
+    { type: 'wall', position: [center + 9, center] },
+    { type: 'wall', position: [center + 10, center] },
+
+    // this is a line
+    { type: 'wall', position: [center, center] },
+    { type: 'wall', position: [center, center + 1] },
+    { type: 'wall', position: [center, center + 2] },
+    { type: 'wall', position: [center, center + 3] },
+    { type: 'wall', position: [center, center + 4] },
+    { type: 'wall', position: [center, center + 5] },
+
+    // this is a square
+    { type: 'wall', position: [center + 5, center] },
+    { type: 'wall', position: [center + 5, center + 1] },
+    { type: 'wall', position: [center + 5, center + 2] },
+    { type: 'wall', position: [center + 6, center] },
+    { type: 'wall', position: [center + 6, center + 2] },
+    { type: 'wall', position: [center + 6, center + 3] },
+    { type: 'wall', position: [center + 7, center + 1] },
+    { type: 'wall', position: [center + 7, center + 2] },
+    { type: 'wall', position: [center + 7, center + 3] },
+
+    // this is a line
+    { type: 'wall', position: [center + 7, center + 4] },
+    { type: 'wall', position: [center + 7, center + 5] },
+    { type: 'wall', position: [center + 7, center + 6] },
+    { type: 'wall', position: [center + 7, center + 7] },
+    { type: 'wall', position: [center + 7, center + 8] },
+    { type: 'wall', position: [center + 7, center + 9] },
+  ]
+}
+
 const playerPosition = [GRID_SIZE / 2, GRID_SIZE / 2]
 
 export const initialState = {
@@ -32,39 +69,7 @@ export const initialState = {
   gameOver: false,
   started: false,
   tombstones: [],
-  objects: [
-    // this is a line
-    { type: 'wall', position: [8, 1] },
-    { type: 'wall', position: [9, 1] },
-    { type: 'wall', position: [10, 1] },
-
-    // this is a line
-    { type: 'wall', position: [1, 1] },
-    { type: 'wall', position: [1, 2] },
-    { type: 'wall', position: [1, 3] },
-    { type: 'wall', position: [1, 4] },
-    { type: 'wall', position: [1, 5] },
-    { type: 'wall', position: [1, 6] },
-
-    // this is a square
-    { type: 'wall', position: [5, 1] },
-    { type: 'wall', position: [5, 2] },
-    { type: 'wall', position: [5, 3] },
-    { type: 'wall', position: [6, 1] },
-    { type: 'wall', position: [6, 2] },
-    { type: 'wall', position: [6, 3] },
-    { type: 'wall', position: [7, 1] },
-    { type: 'wall', position: [7, 2] },
-    { type: 'wall', position: [7, 3] },
-
-    // this is a line
-    { type: 'wall', position: [7, 4] },
-    { type: 'wall', position: [7, 5] },
-    { type: 'wall', position: [7, 6] },
-    { type: 'wall', position: [7, 7] },
-    { type: 'wall', position: [7, 8] },
-    { type: 'wall', position: [7, 9] },
-  ],
+  objects: generateInitialWalls(),
 }
 
 export const reducer = (state = initialState, action) => {
