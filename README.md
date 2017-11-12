@@ -34,9 +34,9 @@ Then package it with:
 
 Logo and Monster:
 
-Cute Monster
-By Symbolon, IT
-https://thenounproject.com/term/cute-monster/831319/
+Cute Monster  
+By Symbolon, IT  
+https://thenounproject.com/term/cute-monster/831319/  
 
 Player:
 
