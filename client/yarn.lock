@@ -400,6 +400,13 @@ aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
+axios@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
+  dependencies:
+    follow-redirects "^1.2.5"
+    is-buffer "^1.1.5"
+
 babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -2010,7 +2017,7 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.9, debug@^2.0.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.6.6, debug@^2.6.8:
+debug@2.6.9, debug@^2.0.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -3119,7 +3126,7 @@ flumeview-level@^1.0.3:
     pull-stream "^3.5.0"
     pull-write "^1.1.1"
 
-flumeview-level@^2.0.2, flumeview-level@^2.0.5:
+flumeview-level@^2.0.2, flumeview-level@^2.0.3, flumeview-level@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/flumeview-level/-/flumeview-level-2.1.0.tgz#46881117d8b2c60d4260405ceb7a18fbad26e2ce"
   dependencies:
@@ -3146,7 +3153,7 @@ flumeview-query@^3.0.0, flumeview-query@^3.0.3:
     pull-sink-through "0.0.0"
     pull-stream "^3.4.0"
 
-flumeview-reduce@^1.1.0, flumeview-reduce@^1.3.0, flumeview-reduce@^1.3.6:
+flumeview-reduce@^1.1.0, flumeview-reduce@^1.3.0, flumeview-reduce@^1.3.6, flumeview-reduce@^1.3.9:
   version "1.3.9"
   resolved "https://registry.yarnpkg.com/flumeview-reduce/-/flumeview-reduce-1.3.9.tgz#586cb4ac6a5ebe078c63e1901e4b107f7d794f30"
   dependencies:
@@ -3157,6 +3164,12 @@ flumeview-reduce@^1.1.0, flumeview-reduce@^1.3.0, flumeview-reduce@^1.3.6:
     obv "0.0.0"
     pull-notify "^0.1.1"
     pull-stream "^3.5.0"
+
+follow-redirects@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.5.tgz#ffd3e14cbdd5eaa72f61b6368c1f68516c2a26cc"
+  dependencies:
+    debug "^2.6.9"
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -5649,6 +5662,10 @@ parseurl@~1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
 
+patchwork@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/patchwork/-/patchwork-0.0.1.tgz#e421f0794bcf5dd6508604d35ef84c0013c7b3d4"
+
 path-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-0.0.0.tgz#a0b870729aae214005b7d5032ec2cbbb0fb4451a"
@@ -7723,6 +7740,28 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
+ssb-about@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ssb-about/-/ssb-about-0.1.1.tgz#34f0c449fbf4eaa9dc4c1780e9554abaf3adf0a3"
+  dependencies:
+    flumeview-reduce "^1.3.9"
+    ssb-ref "^2.7.1"
+
+ssb-backlinks@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/ssb-backlinks/-/ssb-backlinks-0.4.1.tgz#5dee0f3014d1110e86cb854df82473cf781a12b7"
+  dependencies:
+    base64-url "^1.3.3"
+    deep-equal "^1.0.1"
+    flumeview-level "^2.0.3"
+    flumeview-query "^3.0.3"
+    map-filter-reduce "^3.0.3"
+    pull-flatmap "0.0.1"
+    pull-stream "^3.6.0"
+    ssb-keys "^7.0.9"
+    ssb-ref "^2.7.1"
+    xtend "^4.0.1"
+
 ssb-blobs@^1.0.1, ssb-blobs@^1.1.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/ssb-blobs/-/ssb-blobs-1.1.4.tgz#d93f2960b494e10657869ff3bb9f72df69715dc9"
@@ -7735,7 +7774,7 @@ ssb-blobs@^1.0.1, ssb-blobs@^1.1.0:
     pull-stream "^3.3.0"
     ssb-ref "^2.3.0"
 
-ssb-client@^4.4.1, ssb-client@^4.5.1:
+ssb-client@^4.0.3, ssb-client@^4.4.1, ssb-client@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/ssb-client/-/ssb-client-4.5.1.tgz#eca976f1e411d279626af28395f1f93a4caa0a24"
   dependencies:
@@ -7778,6 +7817,13 @@ ssb-friends@^2.0.0, ssb-friends@^2.2.3:
     pull-flatmap "0.0.1"
     pull-stream "^3.6.0"
     ssb-ref "^2.7.1"
+
+ssb-invite@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ssb-invite/-/ssb-invite-1.0.2.tgz#94ccf97150c24508c90f19bbc662ea3ce64a226b"
+  dependencies:
+    minimist "^1.2.0"
+    ssb-client "^4.0.3"
 
 ssb-keys@^7.0.0, ssb-keys@^7.0.12, ssb-keys@^7.0.3, ssb-keys@^7.0.9:
   version "7.0.12"

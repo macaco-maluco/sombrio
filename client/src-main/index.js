@@ -29,28 +29,36 @@ function createWindow() {
     win.webContents.openDevTools()
   }
 
-  connect().then(client => {
-    const buffer = []
+  connect()
+    .then(client => {
+      const buffer = []
 
-    client.feed$.subscribe({
-      next: content => {
-        buffer.push(content)
-        win.webContents.send('wall', content)
-      },
-      error: error => {
-        console.log('error', error)
-      },
-      complete: () => console.log('done'),
-    })
+      client.feed$.subscribe({
+        next: content => {
+          buffer.push(content)
+          win.webContents.send('wall', content)
+        },
+        error: error => {
+          console.log('error', error)
+        },
+        complete: () => console.log('done'),
+      })
 
-    ipcMain.on('app-ready', () => {
-      buffer.forEach(content => win.webContents.send('wall', content))
-    })
+      ipcMain.on('app-ready', () => {
+        buffer.forEach(content => win.webContents.send('wall', content))
+      })
 
-    ipcMain.on('wall', (event, position) => {
-      client.publishWall(position)
+      ipcMain.on('wall', (event, position) => {
+        client.publishWall(position)
+      })
+
+      console.log('about to join')
+
+      // join a random Pub from the internet to make it easy for users
+      // to discover content
+      return client.joinEasySsbPub('http://ssb-pub.macacomaluco.space')
     })
-  })
+    .catch(e => console.log('Something went wrong', e))
 
   // Emitted when the window is closed.
   win.on('closed', () => {

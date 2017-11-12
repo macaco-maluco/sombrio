@@ -1,36 +1,30 @@
-const backgroundSsb = require('./backgroundSsb')
 const path = require('path')
 const ssbKeys = require('ssb-keys')
 const env = require('../env')
+const backgroundSsb = require('./backgroundSsb')
 const observeFeed = require('./observeFeed')
 const publishWall = require('./publishWall')
+const joinEasySsbPub = require('./joinEasySsbPub')
 
-module.exports = () =>
-  new Promise((resolve, reject) => {
-    const cb = function(err, sbot, _, child) {
-      if (err) return reject(err)
+module.exports = async () => {
+  const sbot = await backgroundSsb(keys())
+  console.log('WE ARE connected as', sbot.id)
 
-      console.log('WE ARE connected as', sbot.id)
+  const feed$ = observeFeed(sbot)
 
-      const feed$ = observeFeed(sbot)
+  return {
+    feed$,
+    publishWall: publishWall(sbot),
+    joinEasySsbPub: joinEasySsbPub(sbot),
+  }
+}
 
-      resolve({
-        feed$,
-        publishWall: publishWall(sbot),
-        child,
-      })
-    }
-
-    if (env === 'production') {
-      backgroundSsb(cb)
-    } else {
-      console.log('Setting up local SSB key for debugging')
-
-      backgroundSsb(
-        {
-          keys: ssbKeys.loadOrCreateSync(path.join(__dirname, '../../tmp/app-private.key')),
-        },
-        cb
-      )
-    }
-  })
+const keys = () => {
+  // if (env === 'production') {
+  return null
+  // } else {
+  //   console.log('DEBUG keys')
+  //
+  //   return ssbKeys.loadOrCreateSync(path.join(__dirname, '../../tmp/app-private.key'))
+  // }
+}

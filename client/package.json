@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "asar": "^0.14.0",
+    "electron": "^1.7.9",
+    "electron-packager": "^9.1.0",
     "pathfinding": "^0.4.18",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
@@ -26,15 +28,18 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-heat": "^0.4.0",
-    "sagui": "^11.4.2",
-    "electron-packager": "^9.1.0",
-    "electron": "^1.7.9"
+    "sagui": "^11.4.2"
   },
   "dependencies": {
-    "ramda": "^0.25.0",
     "@most/create": "^2.0.1",
+    "axios": "^0.17.1",
     "most": "^1.7.2",
+    "patchwork": "^0.0.1",
+    "ramda": "^0.25.0",
+    "ssb-about": "^0.1.1",
+    "ssb-backlinks": "^0.4.1",
     "ssb-client": "^4.5.1",
+    "ssb-invite": "^1.0.2",
     "ssb-keys": "^7.0.12",
     "ssb-party": "^0.5.1"
   }
