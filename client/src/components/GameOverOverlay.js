@@ -60,8 +60,8 @@ const Leaderboard = ({ leaderboard }) => [
       </tr>
     </thead>
     <tbody>
-      {leaderboard.map(entry => (
-        <tr>
+      {leaderboard.map((entry, index) => (
+        <tr key={index}>
           <td style={{ paddingBottom: 10, textAlign: 'left', fontSize: 20 }}>
             {entry.playerId.slice(0, 6)}
           </td>
