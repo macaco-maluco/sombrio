@@ -142,9 +142,9 @@ export const allValidObjects = state =>
     }, state.objects)
     .filter(
       object =>
-        object.position[0] > 0 &&
+        object.position[0] > -1 &&
         object.position[0] < 200 &&
-        object.position[1] > 0 &&
+        object.position[1] > -1 &&
         object.position[0] < 200
     )
 
