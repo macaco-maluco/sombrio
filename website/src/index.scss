@@ -4,6 +4,7 @@
 
 html,
 body {
+  margin: 0;
   width: 100%;
   height: 100%;
 }
@@ -30,7 +31,8 @@ body {
   color: rgb(245, 245, 245);
   display: block;
   font-size: 54px;
-  font-weight: 500;
+  font-weight: lighter;
+  font-family: 'Indie Flower', cursive;
   letter-spacing: normal;
   line-height: 48.4px;
   max-width: 616px;
@@ -50,8 +52,7 @@ body {
 .background {
   width: 100%;
   height: 100%;
-  background-color: rgb(51, 0, 102);
-  background-image: url(https://www.transparenttextures.com/patterns/maze-white.png);
+  background-color: rgb(29, 29, 45);
   bottom: 0px;
   box-sizing: border-box;
   color: rgb(50, 54, 72);
