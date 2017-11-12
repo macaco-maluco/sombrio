@@ -1,5 +1,7 @@
 ![Sombrio](https://raw.githubusercontent.com/Hackbit/nko2017-sombrio/master/image.png)
 
+[![Build Status](https://travis-ci.org/Hackbit/nko2017-sombrio.svg)](https://travis-ci.org/Hackbit/nko2017-sombrio)
+
 # Sombrio
 
 There is a Monster chasing you. Your objective is escaping your horrible fate by running around the strange Maze Reality you are in while building/removing walls. The longer you survive the better ;)
