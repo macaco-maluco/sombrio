@@ -1,6 +1,7 @@
 import { range, equals } from 'ramda'
 import PF from 'pathfinding'
 import { createStore } from 'redux'
+import uuid from 'uuid/v4'
 
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
@@ -52,7 +53,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         stagedModifications: [
           ...state.stagedModifications,
-          { type: 'wall', position: fromPixels(action.payload) },
+          { id: uuid(), type: 'wall', position: fromPixels(action.payload) },
         ],
       }
     }
