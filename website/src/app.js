@@ -28,6 +28,9 @@ export default () => (
         Fork me on GitHub
       </a>
     </div>
+    <div>
+      <p>{process.env.APP_VERSION}</p>
+    </div>
   </div>
 )
 
