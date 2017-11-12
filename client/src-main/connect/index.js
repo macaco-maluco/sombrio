@@ -1,4 +1,4 @@
-const party = require('./ssb-party')
+const backgroundSsb = require('./backgroundSsb')
 const path = require('path')
 const ssbKeys = require('ssb-keys')
 const env = require('../env')
@@ -10,7 +10,7 @@ module.exports = () =>
     const cb = function(err, sbot, _, child) {
       if (err) return reject(err)
 
-      console.log('connected as', sbot.id)
+      console.log('WE ARE connected as', sbot.id)
 
       const feed$ = observeFeed(sbot)
 
@@ -22,11 +22,11 @@ module.exports = () =>
     }
 
     if (env === 'production') {
-      party(cb)
+      backgroundSsb(cb)
     } else {
       console.log('Setting up local SSB key for debugging')
 
-      party(
+      backgroundSsb(
         {
           keys: ssbKeys.loadOrCreateSync(path.join(__dirname, '../../tmp/app-private.key')),
         },

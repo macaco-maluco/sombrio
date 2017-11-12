@@ -15,7 +15,7 @@ const appPath =
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win, child
+let win
 
 function createWindow() {
   // Create the browser window.
@@ -31,7 +31,6 @@ function createWindow() {
 
   connect().then(client => {
     const buffer = []
-    child = client.child
 
     client.feed$.subscribe({
       next: content => {
@@ -59,9 +58,7 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null
-    if (child) {
-      process.kill(-child.pid)
-    }
+    process.exit(0)
   })
 }
 

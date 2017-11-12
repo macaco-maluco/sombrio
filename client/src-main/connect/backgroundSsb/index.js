@@ -1,3 +1,10 @@
+/**
+ * Code extracted from npm package `ssb-party` but adapted to start
+ * a new process using an Electron BrowserWindow via the local `spawnSbot`
+ */
+
+/* eslint node/no-deprecated-api: off */
+
 var createConfig = require('ssb-config/inject')
 var ssbKeys = require('ssb-keys')
 var path = require('path')
@@ -9,8 +16,7 @@ var muxrpc = require('muxrpc')
 var pull = require('pull-stream')
 var ssbHash = require('pull-hash/ext/ssb')
 var multicb = require('multicb')
-
-/* eslint node/no-deprecated-api: off */
+var spawnSbot = require('./spawnSbot')
 
 function toSodiumKeys(keys) {
   if (!keys || !keys.public) return null
@@ -30,13 +36,6 @@ function fixAddBlob(add) {
     var sink = pull(ssbHash(done()), add(hash, done()))
     done(cb)
     return sink
-  }
-}
-
-function fork(before, after) {
-  return function() {
-    before.apply(this, arguments)
-    after.apply(this, arguments)
   }
 }
 
@@ -70,12 +69,15 @@ module.exports = function(opts, cb) {
   var keyPublic = keys.public.replace('.ed25519', '')
   var host = config.host || 'localhost'
   var remote = 'net:' + host + ':' + config.port + '~shs:' + keyPublic
-  ;(function tryConnect(remote, child) {
+  ;(function tryConnect(remote) {
     ms.client(remote, function(err, stream) {
       if (err && err.code === 'ECONNREFUSED') {
-        return spawnSbot(config, function(err, remote, child) {
+        return spawnSbot(config, function(err, remote) {
           if (err) return cb(new Error('unable to connect to or start sbot: ' + err.stack))
-          tryConnect(remote, child)
+
+          console.log('TRY to connect', remote)
+
+          tryConnect(remote)
         })
       }
       if (err) return cb(new Error('unable to connect to sbot: ' + err.stack))
@@ -86,48 +88,7 @@ module.exports = function(opts, cb) {
       if (sbot.blobs && sbot.blobs.add) sbot.blobs.add = fixAddBlob(sbot.blobs.add)
       pull(stream, sbot.createStream(), stream)
       delete config.keys
-      var keepalive = setInterval(sbot.whoami, 1e3)
-      sbot.close = fork(sbot.close, function() {
-        clearInterval(keepalive)
-      })
-      cb(null, sbot, config, child)
+      cb(null, sbot, config)
     })
   })(remote)
-}
-
-function spawnSbot(config, cb) {
-  console.error('Starting scuttlebot...')
-  function cbOnce(err, addr, child) {
-    if (!cb) return
-    cb(err, addr, child)
-    cb = null
-  }
-  var conf = config.party || {}
-  var out =
-    typeof conf.out === 'string'
-      ? fs.openSync(path.resolve(config.path, conf.out), 'a')
-      : conf.out === false ? 'ignore' : 'inherit'
-  var err =
-    typeof conf.err === 'string'
-      ? fs.openSync(path.resolve(config.path, conf.err), 'a')
-      : conf.err === false ? 'ignore' : conf.err === true ? 'inherit' : out
-  var proc = require('child_process')
-  var scriptPath = path.join(__dirname, './server.js')
-  var child = proc.spawn(process.execPath, [scriptPath], {
-    detached: true,
-    stdio: ['ignore', out, err, 'ipc'],
-  })
-  child.send(config)
-  child.once('message', function(msg) {
-    var manifestJSON = JSON.stringify(msg.manifest, null, 2)
-    console.log('Writing manifest to', config.manifestFile)
-    fs.writeFile(config.manifestFile, manifestJSON, function(err) {
-      if (err) console.error('warning: unable to write manifest: ' + err.stack)
-      child.unref()
-      cbOnce(null, msg.address, child)
-    })
-  })
-  child.once('error', function(err) {
-    cbOnce(new Error('child sbot error: ' + err.stack))
-  })
 }

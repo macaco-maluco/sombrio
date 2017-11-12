@@ -11,7 +11,7 @@ module.exports = function feed(sbot) {
       }),
       pull.drain(add, end)
     )
-  }).filter(message =>
-    (path(['value', 'content', 'type'], message) || '').match(/macaco_maluco-sombrio/)
-  )
+  }).filter(message => {
+    return (path(['value', 'content', 'type'], message) || '').match(/macaco_maluco-sombrio/)
+  })
 }
