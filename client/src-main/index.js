@@ -3,6 +3,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const url = require('url')
 const connect = require('./connect')
 const env = require('./env')
+const R = require('ramda')
 
 const appPath =
   env === 'production'
@@ -40,7 +41,16 @@ function createWindow() {
     client.feed$.subscribe({
       next: content => {
         buffer.push(content)
-        win.webContents.send('wall', content)
+        const type = R.path(['value', 'content', 'type'], content)
+
+        switch (type) {
+          case 'macaco_maluco-sombrio-tombstone':
+            win.webContents.send('tombstone', content)
+            break
+          case 'macaco_maluco-sombrio-wall':
+            win.webContents.send('wall', content)
+            break
+        }
       },
       error: error => {
         console.log('error', error)
@@ -49,11 +59,26 @@ function createWindow() {
     })
 
     ipcMain.on('app-ready', () => {
-      buffer.forEach(content => win.webContents.send('wall', content))
+      buffer.forEach(content => {
+        const type = R.path(['value', 'content', 'type'], content)
+
+        switch (type) {
+          case 'macaco_maluco-sombrio-tombstone':
+            win.webContents.send('tombstone', content)
+            break
+          case 'macaco_maluco-sombrio-wall':
+            win.webContents.send('wall', content)
+            break
+        }
+      })
     })
 
     ipcMain.on('wall', (event, position) => {
       client.publishWall(position)
+    })
+
+    ipcMain.on('tombstone', (event, position) => {
+      client.publishTombstone(position)
     })
   })
 

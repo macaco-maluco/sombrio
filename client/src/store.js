@@ -1,4 +1,4 @@
-import { range, equals } from 'ramda'
+import { range, equals, uniq } from 'ramda'
 import PF from 'pathfinding'
 import { createStore } from 'redux'
 import uuid from 'uuid/v4'
@@ -12,6 +12,7 @@ export const initialState = {
   monsterPosition: [8, 6],
   stagedModifications: [],
   gameOver: false,
+  tombstones: [],
   objects: [
     // this is a line
     { type: 'wall', position: [8, 1] },
@@ -55,6 +56,13 @@ export const reducer = (state = initialState, action) => {
         gameOver: false,
         playerPosition: initialState.playerPosition,
         targetPosition: initialState.targetPosition,
+      }
+    }
+
+    case 'ADD_TOMBSTONE': {
+      return {
+        ...state,
+        tombstones: [...state.tombstones, {type: 'tombstone', position: action.payload}]
       }
     }
 
@@ -178,6 +186,8 @@ export const allValidObjects = state =>
 export const objectsInPixes = state =>
   allValidObjects(state).map(object => ({ ...object, position: toPixels(object.position) }))
 
+export const tombstonesInPixels = state => uniq(state.tombstones).map(object => ({ ...object, position: toPixels(object.position) }))
+
 export const playerInPixels = state => toPixels(state.playerPosition)
 
 export const monsterInPixels = state => toPixels(state.monsterPosition)
@@ -215,6 +225,8 @@ export const tick = () => ({
 export const resurrect = () => ({
   type: 'ARISE!!',
 })
+
+export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
 
 export const resizeWindow = size => ({ type: 'RESIZE_WINDOW', payload: size })
 

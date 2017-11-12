@@ -7,12 +7,13 @@ import store from './store'
 import tick from './effects/tick'
 import ipc from './effects/ipc'
 import resize from './effects/resize'
+import publishTombstone from './heats/publishTombstone'
 import publishWall from './heats/publishWall'
 
 tick(store)
 ipc(store)
 resize(store)
-subscribe(store, [publishWall])
+subscribe(store, [publishTombstone, publishWall])
 
 render(
   <Provider store={store}>

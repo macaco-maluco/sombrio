@@ -3,6 +3,7 @@ const path = require('path')
 const ssbKeys = require('ssb-keys')
 const env = require('../env')
 const observeFeed = require('./observeFeed')
+const publishTombstone = require('./publishTombstone')
 const publishWall = require('./publishWall')
 
 module.exports = () =>
@@ -16,6 +17,7 @@ module.exports = () =>
 
       resolve({
         feed$,
+        publishTombstone: publishTombstone(sbot),
         publishWall: publishWall(sbot),
         child,
       })
