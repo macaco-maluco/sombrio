@@ -11,6 +11,7 @@ export const initialState = {
   targetPosition: [4, 4],
   monsterPosition: [8, 6],
   stagedModifications: [],
+  gameOver: false,
   objects: [
     // this is a line
     { type: 'wall', position: [8, 1] },
@@ -49,23 +50,16 @@ export const initialState = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'STAGE_MODIFICATION_IN_PIXELS': {
+      if (state.gameOver) {
+        return state
+      }
+
       return {
         ...state,
         stagedModifications: [
           ...state.stagedModifications,
           { id: uuid(), type: 'wall', position: fromPixels(action.payload) },
         ],
-      }
-    }
-
-    case 'MOVE_TO_PIXELS': {
-      const targetPosition = fromPixels(action.payload)
-      targetPosition[0] = Math.min(Math.max(targetPosition[0], 0), 200)
-      targetPosition[1] = Math.min(Math.max(targetPosition[1], 0), 200)
-
-      return {
-        ...state,
-        targetPosition: targetPosition,
       }
     }
 
@@ -88,6 +82,21 @@ export const reducer = (state = initialState, action) => {
       }
     }
 
+    case 'MOVE_TO_PIXELS': {
+      if (state.gameOver) {
+        return state
+      }
+
+      const targetPosition = fromPixels(action.payload)
+      targetPosition[0] = Math.min(Math.max(targetPosition[0], 0), 200)
+      targetPosition[1] = Math.min(Math.max(targetPosition[1], 0), 200)
+
+      return {
+        ...state,
+        targetPosition: targetPosition,
+      }
+    }
+
     case 'RESIZE_WINDOW': {
       return {
         ...state,
@@ -96,13 +105,20 @@ export const reducer = (state = initialState, action) => {
     }
 
     case 'TICK': {
+      if (state.gameOver) {
+        return state
+      }
+
       // make the state available in the window for debugging
       window.state = state
+      const monsterPosition = findMonsterPath(state)[1] || state.monsterPosition
+      const playerPosition = findPlayerPath(state)[1] || state.playerPosition
 
       return {
         ...state,
-        monsterPosition: findMonsterPath(state)[1] || state.monsterPosition,
-        playerPosition: findPlayerPath(state)[1] || state.playerPosition,
+        monsterPosition,
+        playerPosition,
+        gameOver: equals(monsterPosition, playerPosition),
       }
     }
 

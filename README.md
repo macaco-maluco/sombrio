@@ -39,3 +39,8 @@ Pointer:
 Assembly Point
 By Ayub Irawan, ID
 https://thenounproject.com/search/?q=gathering%20point&i=1013299
+
+Gravestone:
+Gravestone
+By anbileru adaleru
+https://thenounproject.com/search/?q=gravestone&i=225333

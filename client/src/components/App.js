@@ -89,9 +89,27 @@ const Monster = ({ position }) => (
   </g>
 )
 
+const Tombstone = ({ position }) => (
+  <g
+    style={{
+      transition: 'transform 1s linear',
+      transform: `translate(${position[0]}px, ${position[1]}px)`,
+    }}
+  >
+    <g id="gravestone" style={{ fill: '#b266ff', transform: 'translate(12px, 10px)' }}>
+      <path
+        d="M18.319335,0.00166666667 C15.9325483,0.00166666667 13.6915592,0.61475 11.73929,1.68533333 L15.2838292,3.33033333 L16.2722333,6.29208333 L14.9941217,6.71866667 L14.1900767,4.30816667 L10.38738,2.54383333 C6.90252583,5.02416667 4.62549192,9.08516667 4.62549192,13.69025 L4.62549192,13.69025 L4.62549192,33.7078333 L11.53911,33.7078333 L9.02684,30.56175 L7.559155,30.56175 L7.559155,29.2134167 L9.67466083,29.2134167 L10.7894467,30.6091667 L11.4882333,28.5111667 L13.5264358,27.4929167 L14.1286833,28.6973333 L12.5925033,29.468 L11.7936717,31.8644167 L13.2666608,33.7078333 L32.0412225,33.7078333 L32.0412225,32.27 L26.0528183,31.415 L23.1946608,27.6053333 L24.2743908,26.796 L24.75538,27.43675 L26.1125033,25.402 L27.2343008,26.1499167 L25.6138967,28.5796667 L26.7971775,30.158 L32.0412225,30.9058333 L32.0412225,13.6621667 C32.0412225,11.6579167 31.5921442,9.76058333 30.8157842,8.04775 L31.119515,8.95708333 L28.7002792,9.76291667 L27.93129,11.3008333 L26.7251775,10.6969167 L27.7452225,8.66041667 L30.6455375,7.69483333 C28.4183008,3.13533333 23.7453125,-0.00541666667 18.319335,1.86221409e-13 L18.319335,0.00166666667 Z"
+        id="Shape"
+      />
+      <polygon id="Shape" points="0.131109833 35 36.535605 35 36.535605 40 0.131109833 40" />
+    </g>
+  </g>
+)
+
 const App = ({
   width,
   height,
+  gameOver,
   objects,
   playerPosition,
   monsterPosition,
@@ -123,9 +141,16 @@ const App = ({
           onContextMenu={e => onModify([e.clientX + x, e.clientY + y])}
           onClick={e => onMove([e.clientX + x, e.clientY + y])}
         >
-          <Target position={targetPosition} />
-          <Player position={playerPosition} />
-          <Monster position={monsterPosition} />
+          {gameOver ? (
+            <Tombstone position={playerPosition} />
+          ) : (
+            <g>
+              <Target position={targetPosition} />
+              <Player position={playerPosition} />
+              <Monster position={monsterPosition} />
+            </g>
+          )}
+
           {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
           <rect stroke="black" fill="none" x={0} y={0} width={200 * 60} height={200 * 60} />
         </svg>
@@ -142,6 +167,7 @@ const mapStateToProps = state => ({
   monsterPosition: monsterInPixels(state),
   targetPosition: targetInPixel(state),
   scale: state.scale,
+  gameOver: state.gameOver,
 })
 
 const mapDispatchToProps = dispatch => ({
