@@ -29,9 +29,9 @@ popd
 
 echo -e "\n[🗜] zipping binaries"
 pushd dist/
-zip -r Sombrio-darwin-x64.zip Sombrio-darwin-x64/
-zip -r Sombrio-linux-x64.zip Sombrio-linux-x64/
-zip -r Sombrio-win32-x64.zip Sombrio-win32-x64/
+zip -rq Sombrio-darwin-x64.zip Sombrio-darwin-x64/
+zip -rq Sombrio-linux-x64.zip Sombrio-linux-x64/
+zip -rq Sombrio-win32-x64.zip Sombrio-win32-x64/
 popd
 
 echo -e "\n🚢 ship it!"
