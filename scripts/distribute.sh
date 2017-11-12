@@ -23,8 +23,8 @@ popd
 
 echo -e "\n[🔨] compile native apps"
 rm -rf dist/
-pushd build/
-./node_modules/.bin/electron-packager ./ --platform=darwin,linux,win32 --arch=x64 --package-manager=yarn --out ../dist
+pushd client/
+./node_modules/.bin/electron-packager ../build --platform=darwin,linux,win32 --arch=x64 --package-manager=yarn --out ../dist
 popd
 
 echo -e "\n[🗜] zipping binaries"
