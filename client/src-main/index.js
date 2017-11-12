@@ -63,6 +63,10 @@ function createWindow() {
       complete: () => console.log('done'),
     })
 
+    setTimeout(() => {
+      win.webContents.send('playerId', client.myId)
+    }, 2000)
+
     ipcMain.on('app-ready', () => {
       win.webContents.send('playerId', client.myId)
 
