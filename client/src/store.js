@@ -68,6 +68,13 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_PLAYER_ID': {
+      return {
+        ...state,
+        playerId: action.payload,
+      }
+    }
+
     case 'START': {
       return {
         ...state,
@@ -268,7 +275,13 @@ export const findMonsterPath = state => {
 }
 
 export const getLeaderboard = state =>
-  [...state.scores].sort((a, b) => b.score - a.score).slice(0, 5)
+  [...state.scores]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5)
+    .map(score => ({
+      ...score,
+      playerId: score.playerId === state.playerId ? 'me' : score.playerId,
+    }))
 
 export const findPlayerPath = state => {
   const grid = new PF.Grid(grid2d(state))
@@ -285,6 +298,8 @@ export const stageModificationInPixels = position => ({
 })
 
 export const commitModification = position => ({ type: 'COMMIT_MODIFICATION', payload: position })
+
+export const setPlayerId = id => ({ type: 'SET_PLAYER_ID', payload: id })
 
 export const tick = () => ({
   type: 'TICK',

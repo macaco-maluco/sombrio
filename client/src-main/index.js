@@ -64,6 +64,8 @@ function createWindow() {
     })
 
     ipcMain.on('app-ready', () => {
+      win.webContents.send('playerId', client.myId)
+
       buffer.forEach(content => {
         const type = R.path(['value', 'content', 'type'], content)
 

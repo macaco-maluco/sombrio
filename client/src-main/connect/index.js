@@ -17,6 +17,7 @@ module.exports = () =>
       const feed$ = observeFeed(sbot)
 
       resolve({
+        myId: sbot.id,
         feed$,
         publishTombstone: publishTombstone(sbot),
         publishWall: publishWall(sbot),
