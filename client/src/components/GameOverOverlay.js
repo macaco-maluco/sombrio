@@ -52,7 +52,7 @@ const style = ({ width, height }) => ({
 const GameOverOverlay = ({ score, width, height, onResurrect }) => (
   <div style={style({ width, height })}>
     <Tombstone width={width} height={height} />
-    <div style={{color: 'white'}}>
+    <div style={{ color: 'white' }}>
       <h1>You survived {score} seconds</h1>
       <Resurrect onClick={onResurrect} />
     </div>

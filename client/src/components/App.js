@@ -149,9 +149,12 @@ const App = ({
             position: 'absolute',
             left: 20,
             top: 20,
+            right: 20,
             color: 'white',
-            fontFamily: 'Helvetica',
+            fontFamily: 'Digital Dream',
             fontWeight: 'bold',
+            fontSize: 50,
+            textAlign: 'center',
           }}
         >
           {score}

@@ -10,6 +10,7 @@ import resize from './effects/resize'
 import publishTombstone from './heats/publishTombstone'
 import publishWall from './heats/publishWall'
 import indieFlowerFont from './IndieFlower.ttf'
+import digitaldreamfat from './digitaldreamfat.ttf'
 
 tick(store)
 ipc(store)
@@ -23,6 +24,12 @@ render(
         {`@font-face {
       font-family: 'Indie Flower';
       src: url('${indieFlowerFont}')  format('truetype');
+    }`}
+      </style>
+      <style>
+        {`@font-face {
+      font-family: 'Digital Dream';
+      src: url('${digitaldreamfat}')  format('truetype');
     }`}
       </style>
       <App />

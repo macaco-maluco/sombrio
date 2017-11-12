@@ -313,9 +313,14 @@ const findIdealMonsterPath = state => {
 }
 
 export const calculateScore = state =>
-  Math.floor((state.gameOver
-    ? state.gameOverTimestamp - state.startTimestamp
-    : state.currentTime - state.startTimestamp) / 1000)
+  Math.max(
+    Math.floor(
+      (state.gameOver
+        ? state.gameOverTimestamp - state.startTimestamp
+        : state.currentTime - state.startTimestamp) / 1000
+    ),
+    0
+  )
 
 const store = createStore(reducer)
 
