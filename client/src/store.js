@@ -3,13 +3,18 @@ import PF from 'pathfinding'
 import { createStore } from 'redux'
 import uuid from 'uuid/v4'
 
+const randomPosition = () => [
+  Math.min(Math.round(Math.random(200) * 100), 200),
+  Math.min(Math.round(Math.random(200) * 100), 200),
+]
+
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   scale: 1,
   gridSize: 60,
   playerPosition: [3, 6],
   targetPosition: [4, 4],
-  monsterPosition: [8, 6],
+  monsterPosition: randomPosition(),
   tickCount: 0,
   stagedModifications: [],
   gameOver: false,
@@ -65,6 +70,7 @@ export const reducer = (state = initialState, action) => {
         gameOver: false,
         playerPosition: initialState.playerPosition,
         targetPosition: initialState.targetPosition,
+        monsterPosition: randomPosition(),
       }
     }
 
