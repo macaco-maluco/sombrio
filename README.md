@@ -16,6 +16,16 @@ https://hackbit.github.io/nko2017-sombrio/
 
 https://sombrio.herokuapp.com/
 
+## Playing the game
+
+There are three ways of playing this game:
+
+1. Play it by your by downloading the app and running it locally.
+
+1. Play with friends in a local network. Fire the app and changes to the world will be seen by all players.  
+
+1. Join the distributed world by first installing [ssbc/patchwork](https://github.com/ssbc/patchwork/releases/latest) and joining a Pub like http://ssb-pub.macacomaluco.space/ then fire Patchwork and after that start the game.
+
 ## Compile the app
 
 Before you can start distribution of the app, first you need to install some dependencies:
