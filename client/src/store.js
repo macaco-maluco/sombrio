@@ -146,14 +146,27 @@ export const reducer = (state = initialState, action) => {
       // FIXME: check also if they will collide in the next
       // make the state available in the window for debugging
       window.state = state
-      const monsterPosition =
-        state.tickCount % 2 === 0
-          ? findMonsterPath(state)[1] || state.monsterPosition
-          : state.monsterPosition
+
+      const monsterPosition = calculateMonsterPosition(state)
+
       const playerPosition =
         state.tickCount % 3 === 0
           ? findPlayerPath(state)[1] || state.playerPosition
           : state.playerPosition
+
+      const wallPosition = allValidObjects(state).find(obj => equals(obj.position, monsterPosition))
+      if (wallPosition) {
+        return {
+          ...state,
+          playerPosition,
+          gameOver: equals(monsterPosition, playerPosition),
+          tickCount: state.tickCount + 1,
+          stagedModifications: [
+            ...state.stagedModifications,
+            { id: uuid(), type: 'wall', position: wallPosition.position },
+          ],
+        }
+      }
 
       return {
         ...state,
@@ -258,6 +271,27 @@ export const start = () => ({
 export const addTombstone = position => ({ type: 'ADD_TOMBSTONE', payload: position })
 
 export const resizeWindow = size => ({ type: 'RESIZE_WINDOW', payload: size })
+
+const calculateMonsterPosition = state => {
+  if (state.tickCount % 2 !== 0) {
+    return state.monsterPosition
+  }
+
+  const availablePath = findMonsterPath(state)
+
+  if (availablePath.length > 0) {
+    return availablePath[1]
+  }
+
+  return findIdealMonsterPath(state)[1]
+}
+
+const findIdealMonsterPath = state => {
+  const grid = new PF.Grid(createGrid([GRID_SIZE, GRID_SIZE]))
+  const finder = new PF.AStarFinder()
+
+  return finder.findPath(...state.monsterPosition, ...state.playerPosition, grid)
+}
 
 const store = createStore(reducer)
 
