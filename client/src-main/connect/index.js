@@ -1,4 +1,4 @@
-const party = require('ssb-party')
+const party = require('./ssb-party')
 const path = require('path')
 const ssbKeys = require('ssb-keys')
 const env = require('../env')
@@ -7,7 +7,7 @@ const publishWall = require('./publishWall')
 
 module.exports = () =>
   new Promise((resolve, reject) => {
-    const cb = function(err, sbot) {
+    const cb = function(err, sbot, _, child) {
       if (err) return reject(err)
 
       console.log('connected as', sbot.id)
@@ -17,6 +17,7 @@ module.exports = () =>
       resolve({
         feed$,
         publishWall: publishWall(sbot),
+        child,
       })
     }
 
