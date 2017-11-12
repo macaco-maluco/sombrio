@@ -10,6 +10,8 @@ Some walls will vanish or appear now and then, blocking your way or heping you (
 
 Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut). Just gather your friends and play a LAN game.
 
+https://youtu.be/qg-fZdESNbM
+
 ## Download the game
 
 Versions for Mac, Linux and Windows x64 here:  
