@@ -67,13 +67,11 @@ const StartScreenOverlay = ({ width, height, onStart }) => (
         Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut), just gather your
         friends and play on a Local Network (LAN).
       </p>
-      <p style={{ color: '#ACE000' }}>
-        How to play? Use the mouse!
-        <ul style={{ margin: 0 }}>
-          <li>Move with the left click</li>
-          <li>Build walls with the right click</li>
-        </ul>
-      </p>
+      <p style={{ color: '#ACE000' }}>How to play? Use the mouse!</p>
+      <ul style={{ margin: 0, color: '#ACE000' }}>
+        <li>Move with the left click</li>
+        <li>Build/destroy walls with the right click</li>
+      </ul>
       <p style={{ paddingTop: 20 }}>
         <StartGame onClick={onStart} />
       </p>
