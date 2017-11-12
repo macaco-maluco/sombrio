@@ -8,13 +8,13 @@ export default () => (
     <div className="background" />
     <div className="downloads">
       <a className="download" href={process.env.MAC_DOWNLOAD_URL || '#mac'}>
-        Mac
+        Mac x64
       </a>
       <a className="download" href={process.env.WINDOWS_DOWNLOAD_URL || '#windows'}>
-        Windows
+        Windows x64
       </a>
       <a className="download" href={process.env.LINUX_DOWNLOAD_URL || '#linux'}>
-        Linux
+        Linux x64
       </a>
     </div>
     <div
