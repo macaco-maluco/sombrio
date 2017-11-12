@@ -104,6 +104,7 @@ const App = ({
           <Player position={playerPosition} />
           <Monster position={monsterPosition} />
           {objects.map(({ position }) => <Wall key={position.join('-')} position={position} />)}
+          <rect stroke="black" fill="none" x={0} y={0} width={200 * 60} height={200 * 60} />
         </svg>
       )
     }}
