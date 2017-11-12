@@ -17,6 +17,7 @@ rm -rf build-website
 mkdir build-website
 
 cp -r website/dist/* build-website/
+cp -r website/favicon/* build-website/
 cp website/index.php build-website/index.php
 cp website/composer.json build-website/composer.json
 
