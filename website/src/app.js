@@ -31,11 +31,30 @@ export default () => (
     <div>
       <p>{process.env.APP_VERSION}</p>
     </div>
-    <div style={{width: '100%', display: 'flex', justifyContent: 'center', color: '#FFFFFF', margin: '10px 0' }}>
-      <div className='instructions'>
-        <p><strong>There is a Monster chasing you.</strong> Your objective is escaping your horrible fate by running around the strange Maze Reality you are in while building/removing walls. The longer you survive the better ;)</p>
-        <p>Some walls will vanish or appear now and then, blocking your way or heping you (who knows, huh?). It is the very magical nature of the Maze Reality affecting you. Only this is not completely true.</p>
-        <p>Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut). Just gather your friends and play a LAN game.</p>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        color: '#FFFFFF',
+        margin: '10px 0',
+      }}
+    >
+      <div className="instructions">
+        <p>
+          <strong>There is a Monster chasing you.</strong> Your objective is escaping your horrible
+          fate by running around the strange Maze Reality you are in while building/removing walls.
+          The longer you survive the better ;)
+        </p>
+        <p>
+          Some walls will vanish or appear now and then, blocking your way or heping you (who knows,
+          huh?). It is the very magical nature of the Maze Reality affecting you. Only this is not
+          completely true.
+        </p>
+        <p>
+          Sombrio is a peer-to-peer game built on top of SSB (Secure Scuttlebut). Just gather your
+          friends and play a LAN game.
+        </p>
       </div>
     </div>
   </div>
