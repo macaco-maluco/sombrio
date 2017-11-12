@@ -23,15 +23,9 @@ popd
 
 echo -e "\n[🔨] compile native apps"
 rm -rf dist/
-pushd client/
-./node_modules/.bin/electron-packager ../build --platform=darwin,linux,win32 --arch=x64 --no-prune --package-manager=yarn --out ../dist
-popd
 
-echo -e "\n[🗜] zipping binaries"
-pushd dist/
-zip -rq Sombrio-darwin-x64.zip Sombrio-darwin-x64/
-zip -rq Sombrio-linux-x64.zip Sombrio-linux-x64/
-zip -rq Sombrio-win32-x64.zip Sombrio-win32-x64/
-popd
+./scripts/packageMac.sh
+./scripts/packageLinux.sh
+./scripts/packageWindows.sh
 
 echo -e "\n🚢 ship it!"

@@ -13,3 +13,11 @@ Then package it with:
 ```sh
 ./scripts/distribute.sh
 ```
+
+## Attributions
+
+Logo:
+
+Cute Monster
+By Symbolon, IT
+https://thenounproject.com/term/cute-monster/831319/
