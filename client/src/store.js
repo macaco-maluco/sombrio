@@ -5,18 +5,23 @@ import uuid from 'uuid/v4'
 
 const GRID_SIZE = 200
 
-const randomPosition = () => [
-  Math.min(Math.round(Math.random(GRID_SIZE) * 100), GRID_SIZE),
-  Math.min(Math.round(Math.random(GRID_SIZE) * 100), GRID_SIZE),
-]
+const randomPosition = referencePosition => {
+  const angle = Math.random() * Math.PI * 2
+  return [
+    referencePosition[0] + Math.floor(Math.sin(angle) * 10),
+    referencePosition[1] + Math.floor(Math.cos(angle) * 10),
+  ]
+}
+
+const playerPosition = [GRID_SIZE / 2, GRID_SIZE / 2]
 
 export const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   scale: 1,
   gridSize: 60,
-  playerPosition: [GRID_SIZE / 2, GRID_SIZE / 2],
+  playerPosition,
   targetPosition: [GRID_SIZE / 2 - 3, GRID_SIZE / 2 + 3],
-  monsterPosition: randomPosition(),
+  monsterPosition: randomPosition(playerPosition),
   tickCount: 0,
   stagedModifications: [],
   gameOver: false,
@@ -72,7 +77,7 @@ export const reducer = (state = initialState, action) => {
         gameOver: false,
         playerPosition: initialState.playerPosition,
         targetPosition: initialState.targetPosition,
-        monsterPosition: randomPosition(),
+        monsterPosition: randomPosition(initialState.playerPosition),
       }
     }
 
